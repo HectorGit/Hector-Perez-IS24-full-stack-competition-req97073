@@ -29,7 +29,11 @@ function App() {
         BC Government Products
       </h1>
 
-      <table>
+      <h1>
+        Total number of products : {products.length}
+      </h1>
+
+      <table style={{border:"2px black solid"}}>
         <thead>
         <tr>
           <th>
@@ -50,47 +54,48 @@ function App() {
           <th>
             Start Date
           </th>
+          <th>
+            Methodology
+          </th>
         </tr>
         </thead>
         <tbody>
           {
             products && products.map((product) => {
               /* Find a way to map the developers */
-
-              <tr>
-                <td>
-                  {product.productId}
-                </td>
-                <td>
-                  placeholder
-                  {/* {product.productName} */}
-                </td>
-                <td>
-                  placeholder
-                  {/* {product.productOwnerName} */}
-                </td>
-                <td>
-                  placeholder
-                  {/* <em>
-                    <p>
-                      {JSON.stringify(product.Developers)}
-                    </p>
-                  </em> */}
-                  {/* {product.Developers} */}
-                </td>
-                <td>
-                  placeholder
-                  {/* {product.scrumMasterName} */}
-                </td>
-                <td>
-                  placeholder
-                  {/* {product.startDate} */}
-                </td>
-                <td>
-                  placeholder
-                  {/* {product.methodology} */}
-                </td>
-              </tr>
+              return(
+                <tr>
+                  <td>
+                    {product.productId}
+                  </td>
+                  <td>
+                    {product.productName}
+                  </td>
+                  <td>
+                    {product.scrumMasterName}
+                  </td>
+                  <td>
+                    {product.productOwnerName}
+                  </td>
+                  <td>
+                    <ul style={{listTypeStyle:"none"}}>
+                    {product.Developers.map((developer_name) => {
+                      return(
+                        <li>
+                          {developer_name}
+                        </li>
+                      )
+                    })}
+                    </ul>
+                  </td>
+                  <td>
+                    {product.startDate}
+                  </td>
+                  <td>
+                    {product.methodology}
+                  </td>
+                </tr>
+              )
 
               }
             )
