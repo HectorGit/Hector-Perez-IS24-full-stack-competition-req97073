@@ -47,10 +47,9 @@ function ProductsPage() {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      // style={{ minHeight: '100vh' }}
       >
 
-        <Grid item xs={3}>
+        <Grid item xs={8}>
           <ProductTableV2 products={products}/>
         </Grid>   
         

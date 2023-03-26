@@ -15,16 +15,16 @@ export default function ProductTableV2(props) {
   return (
 
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 1000 }} aria-label="products-table">
+      <Table sx={{ minWidth:650}} aria-label="products-table">
         <TableHead>
           <TableRow>
-            <TableCell>Product Number</TableCell>
-            <TableCell align="right">Product Name</TableCell>
-            <TableCell align="right">Scrum Master</TableCell>
-            <TableCell align="right">Product Owner</TableCell>
-            <TableCell align="right">Developer Names</TableCell>
-            <TableCell align="right">Start Date</TableCell>
-            <TableCell align="right">Methodology</TableCell>
+            <TableCell align='center'>Product Number</TableCell>
+            <TableCell align="center">Product Name</TableCell>
+            <TableCell align="center">Scrum Master</TableCell>
+            <TableCell align="center">Product Owner</TableCell>
+            <TableCell align="center">Developer Names</TableCell>
+            <TableCell align="center">Start Date</TableCell>
+            <TableCell align="center">Methodology</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -33,13 +33,13 @@ export default function ProductTableV2(props) {
               key={product.productId}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
+              <TableCell align='center' component="th" scope="row">
                 {product.productId}
               </TableCell>
-              <TableCell align="right">{product.productName}</TableCell>
-              <TableCell align="right">{product.scrumMasterName}</TableCell>
-              <TableCell align="right">{product.productOwnerName}</TableCell>
-              <TableCell align="right">
+              <TableCell align="center">{product.productName}</TableCell>
+              <TableCell align="center">{product.scrumMasterName}</TableCell>
+              <TableCell align="center">{product.productOwnerName}</TableCell>
+              <TableCell align="center">
                 <Stack>
                     {product.Developers.map((developer_name) => {
                         return(
@@ -50,8 +50,8 @@ export default function ProductTableV2(props) {
                     }
                 </Stack>
               </TableCell>
-              <TableCell align="right">{product.startDate}</TableCell>
-              <TableCell align="right">{product.methodology}</TableCell>
+              <TableCell align="center">{product.startDate}</TableCell>
+              <TableCell align="center">{product.methodology}</TableCell>
             </TableRow>
           ))}
         </TableBody>
