@@ -24,23 +24,82 @@ function App() {
       <button onClick={handleClick}>
         Fetch The Products
       </button>
-      {
-        products && products.map((product) => {
-            return(
-            <em key={product.productId}>
-              <p>
-                {JSON.stringify(product)}
-              </p>
-            </em>
+
+      <h1>
+        BC Government Products
+      </h1>
+
+      <table>
+        <thead>
+        <tr>
+          <th>
+            Product Number
+          </th>
+          <th>
+            Product Name
+          </th>
+          <th>
+            Scrum Master
+          </th>
+          <th>
+            Product Owner
+          </th>
+          <th>
+            Developer Names
+          </th>
+          <th>
+            Start Date
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+          {
+            products && products.map((product) => {
+              /* Find a way to map the developers */
+
+              <tr>
+                <td>
+                  {product.productId}
+                </td>
+                <td>
+                  placeholder
+                  {/* {product.productName} */}
+                </td>
+                <td>
+                  placeholder
+                  {/* {product.productOwnerName} */}
+                </td>
+                <td>
+                  placeholder
+                  {/* <em>
+                    <p>
+                      {JSON.stringify(product.Developers)}
+                    </p>
+                  </em> */}
+                  {/* {product.Developers} */}
+                </td>
+                <td>
+                  placeholder
+                  {/* {product.scrumMasterName} */}
+                </td>
+                <td>
+                  placeholder
+                  {/* {product.startDate} */}
+                </td>
+                <td>
+                  placeholder
+                  {/* {product.methodology} */}
+                </td>
+              </tr>
+
+              }
             )
           }
-        )
-      }
-      {/* <em>
-        <p>
-          {products}
-        </p>
-      </em> */}
+
+        </tbody>
+      </table>
+
+
     </div>
   );
 }
