@@ -8,11 +8,41 @@ function ProductsPage() {
 
   let [products, setProducts] = useState([])
   
-  function handleClick(){
+  function handleDisplayAllProducts(){
 
     console.log("clicked, fetching the data")
 
     fetch("http://localhost:3000/api/products", {mode:"cors"})
+    .then((response) => response.json() )
+    .then((data) => {
+      setProducts(data['all_products'])
+      console.log(data['all_products'])
+    })
+    .catch((error) => {
+      console.log(error)
+    });
+  }
+
+  function handleDisplayProductsByScrumMaster(scrum_master_name){
+
+    console.log("clicked, fetching the data")
+
+    fetch(`http://localhost:3000/api/products_by_scrum_master/${scrum_master_name}`, {mode:"cors"})
+    .then((response) => response.json() )
+    .then((data) => {
+      setProducts(data['all_products'])
+      console.log(data['all_products'])
+    })
+    .catch((error) => {
+      console.log(error)
+    });
+  }
+
+  function handleDisplayProductsByDeveloper(developer_name){
+
+    console.log("clicked, fetching the data")
+
+    fetch(`http://localhost:3000/api/products_by_developer/${developer_name}`, {mode:"cors"})
     .then((response) => response.json() )
     .then((data) => {
       setProducts(data['all_products'])
@@ -47,7 +77,7 @@ function ProductsPage() {
         </Grid>   
 
         <Grid item xs={10}>
-          <Button sx={{color:'black', width:'300px', bgcolor:"lightblue", marginY:"15px"}} onClick={handleClick}>
+          <Button sx={{color:'black', width:'300px', bgcolor:"lightblue", marginY:"15px"}} onClick={handleDisplayAllProducts}>
             Display All Products <VisibilityIcon fontSize='large'/>
           </Button>
         </Grid>
