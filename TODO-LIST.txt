@@ -15,8 +15,7 @@ frontend : handle input field particularities pending (aka how to get frontend t
 BONUSES 
 
 A- Filter by scrum master. (right now specific scrum master hardcoded)
-backend : implemented 
-frontend : need dropdown w/ existing scrum masters
+backend+frontend impelmented
 
 B- Filter by developer. (right now specific developer hardcoded)
 backend : implemented 
