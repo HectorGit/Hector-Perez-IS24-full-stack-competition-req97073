@@ -15,38 +15,40 @@ function ProductsPage() {
     fetch("http://localhost:3000/api/products", {mode:"cors"})
     .then((response) => response.json() )
     .then((data) => {
-      setProducts(data['all_products'])
-      console.log(data['all_products'])
+      setProducts(data)
+      console.log(data)
     })
     .catch((error) => {
       console.log(error)
     });
   }
 
+  //currently scrum master name hardcoded below in the button
   function handleDisplayProductsByScrumMaster(scrum_master_name){
 
-    console.log("clicked, fetching the data")
+    console.log("by scrum master : ", scrum_master_name)
 
     fetch(`http://localhost:3000/api/products_by_scrum_master/${scrum_master_name}`, {mode:"cors"})
     .then((response) => response.json() )
     .then((data) => {
-      setProducts(data['all_products'])
-      console.log(data['all_products'])
+      setProducts(data)
+      console.log(data)
     })
     .catch((error) => {
       console.log(error)
     });
   }
 
+  //currently developer name hardcoded below in the button
   function handleDisplayProductsByDeveloper(developer_name){
 
-    console.log("clicked, fetching the data")
+    console.log("by developer", developer_name)
 
     fetch(`http://localhost:3000/api/products_by_developer/${developer_name}`, {mode:"cors"})
     .then((response) => response.json() )
     .then((data) => {
-      setProducts(data['all_products'])
-      console.log(data['all_products'])
+      setProducts(data)
+      console.log(data)
     })
     .catch((error) => {
       console.log(error)
@@ -79,6 +81,19 @@ function ProductsPage() {
         <Grid item xs={10}>
           <Button sx={{color:'black', width:'300px', bgcolor:"lightblue", marginY:"15px"}} onClick={handleDisplayAllProducts}>
             Display All Products <VisibilityIcon fontSize='large'/>
+          </Button>
+        </Grid>
+
+        <Grid item xs={10}>
+          <Button sx={{color:'black', width:'300px', bgcolor:"lightblue", marginY:"15px"}} onClick={()=>handleDisplayProductsByDeveloper('Harriett')}>
+            Display Products By Selected Developer <VisibilityIcon fontSize='large'/>
+          </Button>
+        </Grid>
+
+
+        <Grid item xs={10}>
+          <Button sx={{color:'black', width:'300px', bgcolor:"lightblue", marginY:"15px"}} onClick={()=>handleDisplayProductsByScrumMaster('Pierce')}>
+            Display Products By Selected Scrum Master <VisibilityIcon fontSize='large'/>
           </Button>
         </Grid>
 
