@@ -31,19 +31,20 @@ export default function AddProductModal() {
   const handleClose = () => setOpen(false);
 
   const [productName, setProductName] = useState("")
-  const [scrumMaster, setScrumMaster] = useState("")
-  const [productOwner, setProductOwner] = useState("")
-  const [developers, setDevelopers] = useState([])
+  const [scrumMasterName, setScrumMasterName] = useState("")
+  const [productOwnerName, setProductOwnerName] = useState("")
+  const [Developers, setDevelopers] = useState([])
   const [startDate, setStartDate] = useState("")
   const [methodology, setMethodology] = useState("")
+  const formComplete = (productName && scrumMasterName && productOwnerName && Developers && startDate && methodology)
 
   function handleAddNewProduct(){
 
     let data = {
       "productName" : productName,
-      "scrumMaster" : scrumMaster,
-      "productOwner" : productOwner,
-      "developers" : developers,
+      "scrumMaster" : scrumMasterName,
+      "productOwner" : productOwnerName,
+      "developers" : Developers,
       "startDate" : startDate,
       "methodology" : methodology
     }
@@ -53,7 +54,7 @@ export default function AddProductModal() {
 
   return (
     <div>
-      <Button sx={{color:"black"}}onClick={handleOpen}>
+      <Button sx={{color:'black', width:'300px', bgcolor:"lightblue", marginY:"15px"}} onClick={handleOpen}>
         Add New Product <AddCircleIcon fontSize='large'/>
       </Button>
       <Modal
@@ -92,8 +93,8 @@ export default function AddProductModal() {
               <FormLabel>Scrum Master</FormLabel>
               <TextField 
                 fullWidth
-                value={scrumMaster}
-                onChange={(event) => setScrumMaster(event.target.value)}
+                value={scrumMasterName}
+                onChange={(event) => setScrumMasterName(event.target.value)}
                 variant="outlined" 
               />
             </Grid>
@@ -102,8 +103,8 @@ export default function AddProductModal() {
               <FormLabel>Product Owner</FormLabel>
               <TextField 
                 fullWidth
-                value={productOwner}
-                onChange={(event) => setProductOwner(event.target.value)}
+                value={productOwnerName}
+                onChange={(event) => setProductOwnerName(event.target.value)}
                 variant="outlined" 
               />
             </Grid>
@@ -112,7 +113,7 @@ export default function AddProductModal() {
               <FormLabel>Developers</FormLabel>
               <TextField 
                 fullWidth
-                value={developers}
+                value={Developers}
                 onChange={(event) => setDevelopers(event.target.value)}
                 variant="outlined" 
               />
@@ -140,7 +141,12 @@ export default function AddProductModal() {
 
             {/* DISABLE UNTIL FORM COMPLETE */}
             <Grid item xs={12} justifyContent="center" display="flex">
+
+              {formComplete ? 
               <Button fullwidth type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleAddNewProduct}>Add Product</Button>
+              :
+              <Button disabled fullwidth type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleAddNewProduct}>Add Product</Button>
+              }
             </Grid>   
           </Grid>
 

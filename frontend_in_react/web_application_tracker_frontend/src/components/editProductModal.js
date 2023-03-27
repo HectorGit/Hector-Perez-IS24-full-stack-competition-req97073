@@ -36,15 +36,16 @@ export default function EditProductModal(props) {
 
   /* This should pre-populate the form */
   const [productName, setProductName] = useState(currentProduct.productName)
-  const [scrumMasterName, setScrumMaster] = useState(currentProduct.scrumMasterName)
-  const [productOwnerName, setProductOwner] = useState(currentProduct.productOwnerName)
+  const [scrumMasterName, setScrumMasterName] = useState(currentProduct.scrumMasterName)
+  const [productOwnerName, setProductOwnerName] = useState(currentProduct.productOwnerName)
   const [Developers, setDevelopers] = useState(currentProduct.Developers)
   const [startDate, setStartDate] = useState(currentProduct.startDate)
   const [methodology, setMethodology] = useState(currentProduct.methodology)
+  const formComplete = (productName && scrumMasterName && productOwnerName && Developers && startDate && methodology)
 
-  function handleAddNewProduct(){
+  function handleUpdateProduct(){
 
-    let data = {
+    let update_data = {
       "productName" : productName,
       "scrumMaster" : scrumMasterName,
       "productOwner" : productOwnerName,
@@ -52,7 +53,7 @@ export default function EditProductModal(props) {
       "startDate" : startDate,
       "methodology" : methodology
     }
-    console.log(" current setup : ", data)
+    console.log(" update data : ", update_data)
     
   }
 
@@ -98,7 +99,7 @@ export default function EditProductModal(props) {
               <TextField 
                 fullWidth
                 value={scrumMasterName}
-                onChange={(event) => setScrumMaster(event.target.value)}
+                onChange={(event) => setScrumMasterName(event.target.value)}
                 variant="outlined" 
               />
             </Grid>
@@ -108,7 +109,7 @@ export default function EditProductModal(props) {
               <TextField 
                 fullWidth
                 value={productOwnerName}
-                onChange={(event) => setProductOwner(event.target.value)}
+                onChange={(event) => setProductOwnerName(event.target.value)}
                 variant="outlined" 
               />
             </Grid>
@@ -145,7 +146,16 @@ export default function EditProductModal(props) {
 
             {/* DISABLE UNTIL FORM COMPLETE */}
             <Grid item xs={12} justifyContent="center" display="flex">
-              <Button fullwidth type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleAddNewProduct}>Save Changes</Button>
+
+              {formComplete ? 
+              <Button fullwidth type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleUpdateProduct}>
+                Save Changes
+              </Button>
+              :
+              <Button disabled fullwidth type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleUpdateProduct}>
+                Save Changes
+              </Button>}
+
             </Grid>   
           </Grid>
 

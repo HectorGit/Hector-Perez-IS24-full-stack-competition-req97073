@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import AddProductModal from '../components/addProductModal';
 import ProductTable from '../components/productTable';
-import { Grid } from '@mui/material';
+import { Grid , Button} from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 function ProductsPage() {
 
@@ -24,29 +25,34 @@ function ProductsPage() {
 
   return (
     <div>
-      <button onClick={handleClick}>
-        Fetch The Products
-      </button>
-
-      <h1>
-        BC Government Products
-      </h1>
-
-      <p>
-        Total number of products : {products.length}
-      </p>
-      
-      <AddProductModal/>
 
       <Grid
       container
       spacing={0}
-      direction="column"
+      direction="row"
       alignItems="center"
       justifyContent="center"
       >
+        <Grid item xs={10}>
+          <h1>
+            BC Government Products
+          </h1>        
+          <p>
+            Total number of products : {products.length}
+          </p>
+        </Grid>   
 
-        <Grid item xs={8}>
+        <Grid item xs={10}>
+          <AddProductModal/>
+        </Grid>   
+
+        <Grid item xs={10}>
+          <Button sx={{color:'black', width:'300px', bgcolor:"lightblue", marginY:"15px"}} onClick={handleClick}>
+            Display All Products <VisibilityIcon fontSize='large'/>
+          </Button>
+        </Grid>
+
+        <Grid item xs={10}>
           <ProductTable products={products}/>
         </Grid>   
         
