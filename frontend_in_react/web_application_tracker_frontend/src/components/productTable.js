@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Stack, Typography } from '@mui/material';
+import EditProductModal from './editProductModal';
 
 export default function ProductTableV2(props) {
 
@@ -25,6 +26,7 @@ export default function ProductTableV2(props) {
             <TableCell align="center">Developer Names</TableCell>
             <TableCell align="center">Start Date</TableCell>
             <TableCell align="center">Methodology</TableCell>
+            <TableCell align="center">Edit</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -52,6 +54,9 @@ export default function ProductTableV2(props) {
               </TableCell>
               <TableCell align="center">{product.startDate}</TableCell>
               <TableCell align="center">{product.methodology}</TableCell>
+              <TableCell align="center">
+                <EditProductModal product={product}/>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

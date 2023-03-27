@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import EditIcon from '@mui/icons-material/Edit';
 
 import{
   FormLabel,
@@ -25,25 +26,29 @@ const style = {
   p: 4,
 };
 
-export default function AddProductModal() {
+export default function EditProductModal(props) {
+
+  let currentProduct = props.product
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const [productName, setProductName] = useState("")
-  const [scrumMaster, setScrumMaster] = useState("")
-  const [productOwner, setProductOwner] = useState("")
-  const [developers, setDevelopers] = useState([])
-  const [startDate, setStartDate] = useState("")
-  const [methodology, setMethodology] = useState("")
+  /* This should pre-populate the form */
+  const [productName, setProductName] = useState(currentProduct.productName)
+  const [scrumMasterName, setScrumMaster] = useState(currentProduct.scrumMasterName)
+  const [productOwnerName, setProductOwner] = useState(currentProduct.productOwnerName)
+  const [Developers, setDevelopers] = useState(currentProduct.Developers)
+  const [startDate, setStartDate] = useState(currentProduct.startDate)
+  const [methodology, setMethodology] = useState(currentProduct.methodology)
 
   function handleAddNewProduct(){
 
     let data = {
       "productName" : productName,
-      "scrumMaster" : scrumMaster,
-      "productOwner" : productOwner,
-      "developers" : developers,
+      "scrumMaster" : scrumMasterName,
+      "productOwner" : productOwnerName,
+      "developers" : Developers,
       "startDate" : startDate,
       "methodology" : methodology
     }
@@ -54,7 +59,7 @@ export default function AddProductModal() {
   return (
     <div>
       <Button sx={{color:"black"}}onClick={handleOpen}>
-        Add New Product <AddCircleIcon fontSize='large'/>
+        <EditIcon fontSize='medium'/>
       </Button>
       <Modal
         open={open}
@@ -74,7 +79,7 @@ export default function AddProductModal() {
 
             <Grid item xs={12}>
               <Typography variant="h3">
-                Add New Product
+                Edit Product
               </Typography>
             </Grid>
 
@@ -92,7 +97,7 @@ export default function AddProductModal() {
               <FormLabel>Scrum Master</FormLabel>
               <TextField 
                 fullWidth
-                value={scrumMaster}
+                value={scrumMasterName}
                 onChange={(event) => setScrumMaster(event.target.value)}
                 variant="outlined" 
               />
@@ -102,7 +107,7 @@ export default function AddProductModal() {
               <FormLabel>Product Owner</FormLabel>
               <TextField 
                 fullWidth
-                value={productOwner}
+                value={productOwnerName}
                 onChange={(event) => setProductOwner(event.target.value)}
                 variant="outlined" 
               />
@@ -112,7 +117,7 @@ export default function AddProductModal() {
               <FormLabel>Developers</FormLabel>
               <TextField 
                 fullWidth
-                value={developers}
+                value={Developers}
                 onChange={(event) => setDevelopers(event.target.value)}
                 variant="outlined" 
               />
@@ -140,9 +145,11 @@ export default function AddProductModal() {
 
             {/* DISABLE UNTIL FORM COMPLETE */}
             <Grid item xs={12} justifyContent="center" display="flex">
-              <Button fullwidth type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleAddNewProduct}>Add Product</Button>
+              <Button fullwidth type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleAddNewProduct}>Save Changes</Button>
             </Grid>   
           </Grid>
+
+
 
         </Box>
       </Modal>

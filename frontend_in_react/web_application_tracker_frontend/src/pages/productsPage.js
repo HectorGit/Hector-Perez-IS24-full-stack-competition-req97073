@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import AddProductModal from '../components/addProductModal';
-import ProductTableV1 from '../components/productTableV1';
-import ProductTableV2 from '../components/productTableV2';
+import ProductTable from '../components/productTable';
 import { Grid } from '@mui/material';
 
 function ProductsPage() {
@@ -38,8 +37,6 @@ function ProductsPage() {
       </p>
       
       <AddProductModal/>
-      {/* <ProductTableV1 products={products}/> */}
-
 
       <Grid
       container
@@ -50,7 +47,7 @@ function ProductsPage() {
       >
 
         <Grid item xs={8}>
-          <ProductTableV2 products={products}/>
+          <ProductTable products={products}/>
         </Grid>   
         
       </Grid> 
