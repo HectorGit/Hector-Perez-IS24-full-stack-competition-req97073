@@ -25,7 +25,8 @@ implemented
 pending frontend (although it probably will be similar to the above)
 
 ### C- Swagger documentation of the endpoints
-pending
+implemented 
+-pending (further refinement)
 
 -----------------------------------------------------------------------------------------------------------
 

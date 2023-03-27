@@ -217,11 +217,35 @@
         }
     }, 
     "definitions": {
+
         "dataWrittenToJSONFile": {
             "type": "object",
-            "properties": {
-                "all_products":{
-                    "type":"[] Product"
+            "properties": { 
+                "all_products" : [
+                        {
+                            "productId": {
+                                "type": "integer"
+                            },
+                            "productName": {
+                                "type": "string"
+                            },
+                            "productOwnerName": {
+                                "type": "string"
+                            },
+                            "Developers": {
+                                "type": "array"
+                            },
+                            "scrumMasterName": {
+                                "type": "string"
+                            },
+                            "startDate": {
+                                "type": "string"
+                            },
+                            "methodology": {
+                                "type": "string"
+                            }
+                        }
+                    ]
                 }
             }
         },
@@ -271,34 +295,8 @@
                 },
                 "methodology": {
                     "type": "string"
-                }  
-            }
-        },
-        "Product": {
-            "type": "object",
-            "properties": {
-                "productId": {
-                    "type": "integer"
-                },
-                "productName": {
-                    "type": "string"
-                },
-                "productOwnerName": {
-                    "type": "string"
-                },
-                "Developers": {
-                    "type": "array"
-                },
-                "scrumMasterName": {
-                    "type": "string"
-                },
-                "startDate": {
-                    "type": "string"
-                },
-                "methodology": {
-                    "type": "string"
-                }  
             }
         }
     }
+    
 }
