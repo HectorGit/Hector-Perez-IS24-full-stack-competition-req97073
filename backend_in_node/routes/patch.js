@@ -1,35 +1,43 @@
 const express = require("express");
 const patchrouter = express.Router();
+const fs = require('fs')
+
+/*
+
+console.log(parsedContent)
+
+//do stuff to the content
+updatedContent = parsedContent
+
+fs.writeFileSync('products_data.json', JSON.stringify(updatedContent, null, 2))
+
+*/
 
 patchrouter.patch("/update_product/:product_id", (req, res) => 
     {
-        
-        // product_id = req.params.product_id
 
-        // //PSEUDOCODE
+        product_id = req.params.product_id
 
-        // // //read in the dummy data (faux-database)
-        // // FileSystem.read
-        // // products = []
+        //read in the data
+        let rawdata = fs.readFileSync('products_data.json');
+        let products = JSON.parse(rawdata)['all_products'];
+        console.log(products);
 
-        // // find existing data for ID (there will be, since only could've come from the frontend) [on postman, could fail bc ID could not be tied to graphical unit]
-        // product_to_update = products.find(p => p.productId == product_id) //find or filter (will have to test this)
+        //find the index of the product to update in the array, and the product itself
+        indexOfProductToUpdate = products.findIndex(p => p.productId == product_id)
+        productToUpdate = products.find(p => p.productId == product_id)
 
-        // // prepare updated project entry by reading the request body
-        // //if there isn't something in the request body, replace it with current data in the product entry
-        // new_project = {
-        //     //'productId':req.body.productId || products[id].productId,
-        //     'productName':req.body.productName || product_to_update.productName,
-        //     'productOwnerName':req.body.productOwnerName || product_to_update.productOwnerName,
-        //     'Developers':req.body.Developers || product_to_update.Developers,
-        //     'scrumMasterName':req.body.scrumMasterName || product_to_update.scrumMasterName,
-        //     'startDate':req.body.startDate || product_to_update.startDate,
-        //     'methodology':req.body.methodology || product_to_update.methodology
-        // }
+        //caveat, is this iterable ?
+        //set the data (if the body doesn't contain it, just use the currently existing data)
+        products[indexOfProductToUpdate.productName] = req.body.productName || productToUpdate.productName
+        products[indexOfProductToUpdate.productOwnerName] = req.body.productOwnerName || productToUpdate.productOwnerName
+        products[indexOfProductToUpdate.Developers] = req.body.Developers || productToUpdate.Developers
+        products[indexOfProductToUpdate.scrumMasterName] = req.body.scrumMasterName || productToUpdate.scrumMasterName
+        products[indexOfProductToUpdate.startDate] = req.body.startDate || productToUpdate.startDate
+        products[indexOfProductToUpdate.methodology] = req.body.methodology || productToUpdate.methodology
 
-        // //copy all the existing data(?) and affect the copy w/ the updates
-        // //write the updated data to the file.
-        // // FileSystem.write
+        //write the updated data :
+        fs.writeFileSync('products_data.json', JSON.stringify(products, null, 2))
 
     }
 );
