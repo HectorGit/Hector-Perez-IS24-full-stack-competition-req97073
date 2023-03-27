@@ -1,5 +1,9 @@
 var express = require('express');
 var app = express();
+
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
 var path = require("path");
 const bodyParser = require('body-parser')
 var port = 3000;
@@ -25,6 +29,11 @@ app.use("/api", require("./routes/get"));
 app.use("/api", require("./routes/post"));
 app.use("/api", require("./routes/patch"));
 app.use("/api", require("./routes/delete"));
+
+var options = {
+  explorer: true
+};
+app.use('/api/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 
 
 app.listen(port);

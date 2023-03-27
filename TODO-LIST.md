@@ -14,7 +14,7 @@ implemented
 -pending : for the add and edit forms, choose correct input type to make data entry easier, as well as data handling in the backend
 -pending : for the add and edit forms, add validation on input data (e.g. < 5 developers, only agile and waterfall, etc.)
 
------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 
 ## BONUSES 
 
@@ -27,7 +27,7 @@ pending frontend (although it probably will be similar to the above)
 ### C- Swagger documentation of the endpoints
 pending
 
------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 
 ## OTHER 
 
@@ -37,3 +37,5 @@ update readme before submitting
 
 ### Future optimizations : 
 redux to cache the data, and actual database (?)
+
+-----------------------------------------------------------------------------------------------------------
