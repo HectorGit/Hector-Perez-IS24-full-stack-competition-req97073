@@ -6,6 +6,7 @@ patchrouter.patch("/update_product/:product_id", (req, res) =>
     {
 
         product_id = req.params.product_id
+        console.log("product_id : " , product_id)
 
         //read in the data
         let rawdata = fs.readFileSync('products_data.json');
