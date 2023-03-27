@@ -38,7 +38,11 @@ postrouter.post("/add_new_project",
             'methodology':req.body.methodology
         })
 
-        fs.writeFileSync('products_data.json', JSON.stringify(products, null, 2))
+        adjusted_content = {"all_products":products}
+
+        fs.writeFileSync('products_data.json', JSON.stringify(adjusted_content, null, 2))
+
+        return res.send(200).send(products)
 
     }
 );

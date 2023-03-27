@@ -49,6 +49,15 @@ export default function AddProductModal() {
       "methodology" : methodology
     }
     console.log(" current setup : ", data)
+
+    fetch(`http://localhost:3000/api/add_product`, data, {mode:"cors"})
+    .then((response) => response.json() )
+    .then((data) => {
+      console.log(data)
+    })
+    .catch((error) => {
+      console.log(error)
+    });
     
   }
 

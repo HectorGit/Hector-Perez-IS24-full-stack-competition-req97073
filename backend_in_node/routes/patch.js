@@ -25,8 +25,10 @@ patchrouter.patch("/update_product/:product_id", (req, res) =>
         products[indexOfProductToUpdate.startDate] = req.body.startDate || productToUpdate.startDate
         products[indexOfProductToUpdate.methodology] = req.body.methodology || productToUpdate.methodology
 
+        adjusted_content = {"all_products":products}
+
         //write the updated data :
-        fs.writeFileSync('products_data.json', JSON.stringify(products, null, 2))
+        fs.writeFileSync('products_data.json', JSON.stringify(adjusted_content, null, 2))
 
     }
 );

@@ -43,7 +43,7 @@ export default function EditProductModal(props) {
   const [methodology, setMethodology] = useState(currentProduct.methodology)
   const formComplete = (productName && scrumMasterName && productOwnerName && Developers && startDate && methodology)
 
-  function handleUpdateProduct(){
+  function handleUpdateProduct(productId){
 
     let update_data = {
       "productName" : productName,
@@ -54,6 +54,15 @@ export default function EditProductModal(props) {
       "methodology" : methodology
     }
     console.log(" update data : ", update_data)
+    
+    fetch(`http://localhost:3000/api/update_product/${productId}`, {mode:"cors"})
+    .then((response) => response.json() )
+    .then((data) => {
+      console.log(data)
+    })
+    .catch((error) => {
+      console.log(error)
+    });
     
   }
 
@@ -152,7 +161,7 @@ export default function EditProductModal(props) {
                 Save Changes
               </Button>
               :
-              <Button disabled fullwidth type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleUpdateProduct}>
+              <Button disabled fullwidth type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={()=>handleUpdateProduct(currentProduct.productId)}>
                 Save Changes
               </Button>}
 
