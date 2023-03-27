@@ -127,6 +127,7 @@ function ProductsPage() {
                 value={scrumMasterSelected}
                 label="Scrum Master Selected"
                 onChange={handleChangeScrumMasterSelected}
+                sx={{width:'150px'}}
               >
                 {
                   scrumMasterNames.map((scrumMasterName) => {

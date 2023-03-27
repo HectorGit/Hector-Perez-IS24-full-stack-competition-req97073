@@ -599,21 +599,6 @@
       "scrumMasterName": "Mildred",
       "startDate": "2019-11-17",
       "methodology": "Agile"
-    },
-    {
-      "productId": 41,
-      "productName": "TestProduct",
-      "productOwnerName": "TestProductOnwer",
-      "Developers": [
-        "TestDev1",
-        "TestDev2",
-        "TestDev3",
-        "TestDev4",
-        "TestDev5"
-      ],
-      "scrumMasterName": "TestScrumMaster",
-      "startDate": "2019-04-26",
-      "methodology": "Waterfall"
     }
   ]
 }
