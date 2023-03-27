@@ -10,5 +10,5 @@ console.log(parsedContent)
 //do stuff to the content
 updatedContent = parsedContent
 
-fs.writeFileSync('products_data.json', JSON.stringify(updatedContent))
+fs.writeFileSync('products_data.json', JSON.stringify(updatedContent, null, 2))
 
