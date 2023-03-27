@@ -18,10 +18,12 @@ const fs = require('fs')
 postrouter.post("/add_product",
     async(req,res) => {
 
+        console.log("request body : " , req.body)
+
         //read in the data
         let rawdata = fs.readFileSync('products_data.json');
         let products = JSON.parse(rawdata)['all_products'];
-        console.log(products);
+        // console.log(products);
 
         //find highest index, and add 1 to it to create the new product id
         maxIdProductIndex = products.reduce((a,b)=>a.productId>b.productId.y?a:b).productId

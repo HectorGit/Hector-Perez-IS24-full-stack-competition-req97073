@@ -42,15 +42,22 @@ export default function AddProductModal() {
 
     let data = {
       "productName" : productName,
-      "scrumMaster" : scrumMasterName,
-      "productOwner" : productOwnerName,
-      "developers" : Developers,
+      "scrumMasterName" : scrumMasterName,
+      "productOwnerName" : productOwnerName,
+      "Developers" : Developers,
       "startDate" : startDate,
       "methodology" : methodology
     }
     console.log(" current setup : ", data)
 
-    fetch(`http://localhost:3000/api/add_product`, {mode:"cors", method:"POST", body:data})
+    fetch(`http://localhost:3000/api/add_product`, {
+      mode:"cors", 
+      method:"POST", 
+      body: JSON.stringify(data),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      }    
+    })
     .then((response) => response.json() )
     .then((data) => {
       console.log(data)
@@ -99,7 +106,7 @@ export default function AddProductModal() {
             </Grid>
 
             <Grid item xs={12}>
-              <FormLabel>Scrum Master</FormLabel>
+              <FormLabel>Scrum Master Name</FormLabel>
               <TextField 
                 fullWidth
                 value={scrumMasterName}
@@ -109,7 +116,7 @@ export default function AddProductModal() {
             </Grid>
 
             <Grid item xs={12}>
-              <FormLabel>Product Owner</FormLabel>
+              <FormLabel>Product Owner Name</FormLabel>
               <TextField 
                 fullWidth
                 value={productOwnerName}
