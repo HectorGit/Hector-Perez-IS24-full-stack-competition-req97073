@@ -5,24 +5,22 @@ User Stories
 autogenerator didn't repeat individuals
 
 #2 - Able to add a product : 
-- pending : add new backend endpoint (POST)
-- pending : refine frontend to better shape data incoming to the endpoint
-complexity : possibly not as hard, just need to collect the data in the form, 
-and the back can write to 
+backend : PSEUDOCODE created
+frontend : handle developers particularities pending (aka how to  get frontend to properly send data to the endpoint)
 
 #3 - Able to edit an existing product : 
-- pending : backend - make a (PATCH) method endpoint to handle this
-(possibly will modify theh element in the JSON with the matching ID to the row clicked, 
-and then write that to the .json store). managing the pre-existing data could have some caveats
+backend : PSEUDOCODE created
+frontend : handle input field particularities pending (aka how to get frontend to properly send data to the endpoint)
 
 BONUSES 
 
 A- Filter by scrum master. (right now specific scrum master hardcoded)
-- pending : have a filter in the frontend for existing scrum masters in the data 
-- pending : there could be a way in the front or the back to extract the existing scrum masters in the data [populated dropdown]
+backend : implemented 
+frontend : need dropdown w/ existing scrum masters
 
 B- Filter by developer. (right now specific developer hardcoded)
-- pending : similar to above, figure out currently active developers, and allow to filter by them dynamically [populated dropdown]
+backend : implemented 
+frontend : need dropdown w/ existing developers
 
 C- Swagger documentation of the endpoints
 
