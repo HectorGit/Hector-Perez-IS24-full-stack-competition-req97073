@@ -17,29 +17,29 @@ const postrouter = express.Router();
 postrouter.post("/add_new_project",
     async(req,res) => {
 
-        //PSEUDOCODE
+        //read in the data
+        let rawdata = fs.readFileSync('products_data.json');
+        let products = JSON.parse(rawdata)['all_products'];
+        console.log(products);
 
-        // //read in the dummy data (faux-database)
-        // FileSystem.read
-        // products = []
+        //find highest index, and add 1 to it to create the new product id
+        maxIdProductIndex = products.reduce((a,b)=>a.productId>b.productId.y?a:b).productId
 
-        // //prepare new project entry by reading all data from request body
+        console.log("productIdToUseToStoreWithoutClash: ", maxIdProductIndex+1)
 
-        // new_project = {
-        //     'productName':req.body.productName,
-        //     'productOwnerName':req.body.productOwnerName,
-        //     'Developers':req.body.Developers,
-        //     'scrumMasterName':req.body.scrumMasterName,
-        //     'startDate':req.body.startDate,
-        //     'methodology':req.body.methodology
-        // }
+        //add new entry to the products
+        products.push({
+            'productId':maxIdProductIndex+1,
+            'productName':req.body.productName,
+            'productOwnerName':req.body.productOwnerName,
+            'Developers':req.body.Developers,
+            'scrumMasterName':req.body.scrumMasterName,
+            'startDate':req.body.startDate,
+            'methodology':req.body.methodology
+        })
 
-        // //figure out the 'next' appropriate id to use. find max, and +1 it.
-        // new_index = products.max(productId) + 1
-        // new_project['productId'] = new_index
+        fs.writeFileSync('products_data.json', JSON.stringify(products, null, 2))
 
-        // //write the new entry to the dummy data
-        // FileSystem.write
     }
 );
 
