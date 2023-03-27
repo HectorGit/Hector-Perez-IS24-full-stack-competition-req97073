@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import { Stack, Typography } from '@mui/material';
 import EditProductModal from './editProductModal';
 
-export default function ProductTableV2(props) {
+export default function ProductTable(props) {
 
   let products = props.products
 
