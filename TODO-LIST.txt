@@ -1,0 +1,32 @@
+User Stories 
+
+#1 - See a list of all products 
+- pending : perhaps touch up the dummy data a bit to have same individuals in different projects, 
+autogenerator didn't repeat individuals
+
+#2 - Able to add a product : 
+- pending : add new backend endpoint (POST)
+- pending : refine frontend to better shape data incoming to the endpoint
+complexity : possibly not as hard, just need to collect the data in the form, 
+and the back can write to 
+
+#3 - Able to edit an existing product : 
+- pending : backend - make a (PATCH) method endpoint to handle this
+(possibly will modify theh element in the JSON with the matching ID to the row clicked, 
+and then write that to the .json store)
+
+BONUSES 
+
+A- Filter by scrum master. (right now specific scrum master hardcoded)
+- pending : have a filter in the frontend for existing scrum masters in the data 
+- pending : there could be a way in the front or the back to extract the existing scrum masters in the data [populated dropdown]
+
+B- Filter by developer. (right now specific developer hardcoded)
+- pending : similar to above, figure out currently active developers, and allow to filter by them dynamically [populated dropdown]
+
+C- Swagger documentation of the endpoints
+
+Thoughts : 
+remember to make readme w/ proper instructions to launch the project frontend and backend 
+endpoints in the backend could be improved if connected to actual database, as not all data would have to be read in from a file every time.
+considered solution is to (if time available) continue to read from file, but have a redux store that will keep the data once the fetch has occurred , so as to not have to re-read from the file everytime
