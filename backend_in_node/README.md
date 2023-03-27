@@ -1,3 +1,0 @@
-# NETCON GT API
-
-Welcome !
