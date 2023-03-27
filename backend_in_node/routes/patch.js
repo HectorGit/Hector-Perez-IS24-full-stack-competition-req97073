@@ -30,6 +30,7 @@ patchrouter.patch("/update_product/:product_id", (req, res) =>
         //write the updated data :
         fs.writeFileSync('products_data.json', JSON.stringify(adjusted_content, null, 2))
 
+        return res.status(200).send(adjusted_content)
     }
 );
 

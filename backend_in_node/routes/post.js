@@ -1,5 +1,6 @@
 const express = require("express");
 const postrouter = express.Router();
+const fs = require('fs')
 
 /**
  * The body will contain : {
@@ -14,7 +15,7 @@ const postrouter = express.Router();
  * 
  * }
  */
-postrouter.post("/add_new_project",
+postrouter.post("/add_product",
     async(req,res) => {
 
         //read in the data
@@ -42,7 +43,7 @@ postrouter.post("/add_new_project",
 
         fs.writeFileSync('products_data.json', JSON.stringify(adjusted_content, null, 2))
 
-        return res.send(200).send(products)
+        return res.status(200).send(adjusted_content)
 
     }
 );

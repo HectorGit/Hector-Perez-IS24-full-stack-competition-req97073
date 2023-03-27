@@ -50,7 +50,7 @@ export default function AddProductModal() {
     }
     console.log(" current setup : ", data)
 
-    fetch(`http://localhost:3000/api/add_product`, data, {mode:"cors"})
+    fetch(`http://localhost:3000/api/add_product`, {mode:"cors", method:"POST", body:data})
     .then((response) => response.json() )
     .then((data) => {
       console.log(data)

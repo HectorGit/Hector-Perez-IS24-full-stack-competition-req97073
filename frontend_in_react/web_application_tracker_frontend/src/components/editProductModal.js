@@ -55,7 +55,7 @@ export default function EditProductModal(props) {
     }
     console.log(" update data : ", update_data)
     
-    fetch(`http://localhost:3000/api/update_product/${productId}`, {mode:"cors"})
+    fetch(`http://localhost:3000/api/update_product/${productId}`, {mode:"cors", method:"PATCH", body:update_data})
     .then((response) => response.json() )
     .then((data) => {
       console.log(data)
