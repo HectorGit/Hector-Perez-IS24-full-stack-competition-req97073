@@ -7,11 +7,12 @@
 
 ### 2 - Able to add a product : 
 implemented
-refinement pending : form field types and validations (e.g. dropdown to choose between agile and waterfall)
 
 ### 3 - Able to edit an existing product : 
 implemented
-refinement pending : form field types and validations (e.g. dropdown to choose between agile and waterfall)
+
+-pending : for the add and edit forms, choose correct input type to make data entry easier, as well as data handling in the backend
+-pending : for the add and edit forms, add validation on input data (e.g. < 5 developers, only agile and waterfall, etc.)
 
 -----------------------------------------------------------------------------------------------------------------------------------
 
