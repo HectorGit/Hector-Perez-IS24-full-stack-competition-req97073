@@ -13,7 +13,7 @@ and the back can write to
 #3 - Able to edit an existing product : 
 - pending : backend - make a (PATCH) method endpoint to handle this
 (possibly will modify theh element in the JSON with the matching ID to the row clicked, 
-and then write that to the .json store)
+and then write that to the .json store). managing the pre-existing data could have some caveats
 
 BONUSES 
 
