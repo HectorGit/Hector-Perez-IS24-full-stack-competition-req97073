@@ -5,6 +5,9 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import WarningIcon from '@mui/icons-material/Warning';
 import DeleteIcon from '@mui/icons-material/Delete';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
 
 import{
   FormLabel,
@@ -96,18 +99,24 @@ export default function DeleteProductModal(props) {
               <Typography>
                 Product Owner Name : {currentProduct.productOwnerName}
               </Typography>
-              <Typography>
-                Developers : 
-                <ul>
+
+              <>
+                <Typography>
+                  Developers : 
+                </Typography>
+                <List dense={true}>
                   {currentProduct.Developers.map((developer_name) => {
                     return(
-                      <li>
-                        {developer_name}
-                      </li>
+                      <ListItem key={developer_name}>
+                        <ListItemText
+                          primary={developer_name}
+                        />
+                      </ListItem>
                     )})
                   }
-                </ul>
-              </Typography>
+                </List>
+              </>
+
 
               <Typography>
                 startDate : {currentProduct.startDate}

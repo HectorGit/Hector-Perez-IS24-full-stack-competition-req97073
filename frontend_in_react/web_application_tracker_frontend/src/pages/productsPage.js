@@ -32,7 +32,7 @@ function ProductsPage() {
     .then((response) => response.json() )
     .then((data) => {
       setProducts(data)
-      console.log(data)
+      // console.log(data)
     })
     .catch((error) => {
       console.log(error)
@@ -59,9 +59,9 @@ function ProductsPage() {
       })
     })
 
-    console.log("scrum_master_names", scrum_master_names)
+    // console.log("scrum_master_names", scrum_master_names)
     setScrumMasterNames(scrum_master_names)
-    console.log("developer_names", developer_names)
+    // console.log("developer_names", developer_names)
     setDeveloperNames(developer_names)
   }, [products])
 
