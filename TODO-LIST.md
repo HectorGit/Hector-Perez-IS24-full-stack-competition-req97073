@@ -12,9 +12,10 @@ implemented
 implemented
 
 ### conditions to take into considaration : 
+- possible improvement 0 : organize components at the top
+- possible improvement 1 : organize the list of developers in the add and edit modals
+- possible improvement 2 : instead of 'location.reload' use redux to dispatch refetch (probably can in a separate branch)
 
-- possible improvement 1 : instead of 'location.reload' use redux to dispatch refetch
-- possible improvement 2 : instead of current setup, make the 5 developer entry better for user, and also handle it as a list in the backend.
 -----------------------------------------------------------------------------------------------------------
 
 ## BONUSES 

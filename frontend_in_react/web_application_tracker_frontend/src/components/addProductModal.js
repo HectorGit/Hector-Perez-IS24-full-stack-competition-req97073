@@ -3,12 +3,14 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { Stack } from '@mui/system';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import dayjs, { Dayjs } from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { DateField } from '@mui/x-date-pickers/DateField';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 
 import{
   FormLabel,
@@ -41,13 +43,35 @@ export default function AddProductModal() {
   const [productName, setProductName] = useState("")
   const [scrumMasterName, setScrumMasterName] = useState("")
   const [productOwnerName, setProductOwnerName] = useState("")
+  const [developerToAdd,setDeveloperToAdd] = useState("")
   const [Developers, setDevelopers] = useState([])
   const [startDate, setStartDate] = useState(dayjs());//calling dayjs without date returns date w / current date and time
   const [methodology, setMethodology] = useState("")
-  const formComplete = (productName && scrumMasterName && productOwnerName && Developers && startDate && methodology)
+  const formComplete = (productName && scrumMasterName && productOwnerName && Developers.length <= 5 && startDate && methodology)
 
   const handleMethodologySelected = (e) => {
     setMethodology(e.target.value);
+  };
+
+  function handleChangeDeveloperToAdd(e){
+    setDeveloperToAdd(e.target.value);//clear it
+  };
+
+  function handleAddDeveloper(){
+    if(Developers.length >= 5){
+      alert("Whoops ! - Only up to 5 developers are allowed per project !")
+    }else{
+      if(developerToAdd!=""){
+        setDevelopers([...Developers, developerToAdd])
+        setDeveloperToAdd("");//clear it
+      }
+    }
+  };
+
+  function handleRemoveDeveloper(developer){
+    console.log("developer to remove : ", developer)
+    setDevelopers(Developers.filter( d => d != developer))
+    console.log("remove:",Developers)
   };
 
   function handleAddNewProduct(){
@@ -145,12 +169,22 @@ export default function AddProductModal() {
 
             <Grid item xs={12}>
               <FormLabel>Developers</FormLabel>
-              <TextField 
-                fullWidth
-                value={Developers}
-                onChange={(event) => setDevelopers(event.target.value)}
-                variant="outlined" 
-              />
+              <Stack direction="row" spacing={1}>
+                <TextField fullWidth id="addDeveloperTextField" value={developerToAdd} onChange={handleChangeDeveloperToAdd} variant="outlined" />
+                <Button disabled={ Developers.length >= 5 } type='button' variant="contained" onClick={handleAddDeveloper}>Add <AddCircleIcon fontSize='small'/></Button>
+              </Stack>
+            </Grid>
+
+            <Grid item xs = {12}>
+              { Developers.length > 0 && Developers.map( (developer) => {
+                  return(
+                    <Stack key={"stack-"+developer} direction = "row" >
+                      <Typography>{developer}</Typography>
+                      <Button type="button" variant="contained" onClick={()=>handleRemoveDeveloper(developer)}><PersonRemoveIcon fontSize='small'/></Button>
+                    </Stack>
+                  )
+                })
+              }
             </Grid>
 
             <Grid item xs={12}>
