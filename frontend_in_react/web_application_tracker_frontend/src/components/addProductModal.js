@@ -38,6 +38,10 @@ export default function AddProductModal() {
   const [methodology, setMethodology] = useState("")
   const formComplete = (productName && scrumMasterName && productOwnerName && Developers && startDate && methodology)
 
+  const handleMethodologySelected = (e) => {
+    setMethodology(e.target.value);
+  };
+
   function handleAddNewProduct(){
 
     let data = {
@@ -148,14 +152,21 @@ export default function AddProductModal() {
               />
             </Grid>
 
+            {/* constrain choices, only agile and waterfall */}
             <Grid item xs={12}>
               <FormLabel>Methodology</FormLabel>
-              <TextField 
-                fullWidth
-                value={methodology}
-                onChange={(event) => setMethodology(event.target.value)}
-                variant="outlined" 
-              />
+              <Select
+                  labelId="methodology-label"
+                  id="methodology-filter"
+                  value={methodology}
+                  label="Methodology"
+                  onChange={hangleMethodologySelected}
+                  sx={{width:'150px'}}
+                >
+                  <MenuItem value={'Waterfall'}>Waterfall</MenuItem>
+                  <MenuItem value={'Agile'}>Agile</MenuItem>
+                </Select>
+
             </Grid>
 
             {/* DISABLE UNTIL FORM COMPLETE */}
