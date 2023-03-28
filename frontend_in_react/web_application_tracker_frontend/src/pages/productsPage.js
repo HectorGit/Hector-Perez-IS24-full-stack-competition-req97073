@@ -20,10 +20,12 @@ function ProductsPage() {
 
   const handleChangeScrumMasterSelected = (e) => {
     setScrumMasterSelected(e.target.value);
+    setDeveloperSelected('');
   };
 
   const handleDeveloperSelected = (e) => {
     setDeveloperSelected(e.target.value);
+    setScrumMasterSelected(''); //did this to eliminate console log warning out of range, as products get reloaded and this scrum master no longer exists as an option
   };
 
   //fetch the data without user having to click a button
