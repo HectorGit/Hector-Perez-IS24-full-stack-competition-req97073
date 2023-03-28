@@ -155,7 +155,7 @@ function ProductsPage() {
                 >
                   {
                     developerNames.map((developerName) => {
-                      return (<MenuItem value={developerName}>{developerName}</MenuItem>)
+                      return (<MenuItem  key={developerName} value={developerName}>{developerName}</MenuItem>)
                     })
                   }
                 </Select>
@@ -186,7 +186,7 @@ function ProductsPage() {
               >
                 {
                   scrumMasterNames.map((scrumMasterName) => {
-                    return (<MenuItem value={scrumMasterName}>{scrumMasterName}</MenuItem>)
+                    return (<MenuItem key={scrumMasterName} value={scrumMasterName}>{scrumMasterName}</MenuItem>)
                   })
                 }
               </Select>

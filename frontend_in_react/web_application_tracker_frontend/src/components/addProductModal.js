@@ -185,9 +185,9 @@ export default function AddProductModal() {
             <Grid item xs={12} justifyContent="center" display="flex">
 
               {formComplete ? 
-              <Button fullwidth type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleAddNewProduct}>Add Product</Button>
+              <Button type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleAddNewProduct}>Add Product</Button>
               :
-              <Button disabled fullwidth type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleAddNewProduct}>Add Product</Button>
+              <Button disabled type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleAddNewProduct}>Add Product</Button>
               }
             </Grid>   
           </Grid>

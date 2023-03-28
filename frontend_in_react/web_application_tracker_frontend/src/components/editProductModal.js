@@ -193,11 +193,11 @@ export default function EditProductModal(props) {
             <Grid item xs={12} justifyContent="center" display="flex">
 
               {formComplete ? 
-              <Button fullwidth type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleUpdateProduct}>
+              <Button type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleUpdateProduct}>
                 Save Changes
               </Button>
               :
-              <Button disabled fullwidth type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleUpdateProduct}>
+              <Button disabled type="submit" variant="contained" sx={{marginTop:"50px"}} onClick={handleUpdateProduct}>
                 Save Changes
               </Button>}
 

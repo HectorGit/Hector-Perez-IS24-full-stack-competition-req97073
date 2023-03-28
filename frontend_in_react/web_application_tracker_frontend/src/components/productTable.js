@@ -47,7 +47,7 @@ export default function ProductTable(props) {
                 <Stack>
                     {product.Developers.map((developer_name) => {
                         return(
-                            <Typography>
+                            <Typography key={developer_name}>
                                 {developer_name}
                             </Typography>
                         )})
