@@ -61,10 +61,13 @@ export default function AddProductModal() {
     .then((response) => response.json() )
     .then((data) => {
       console.log(data)
+      setOpen(false)
+      document.location.reload()//check syntax
     })
     .catch((error) => {
       console.log(error)
     });
+
     
   }
 

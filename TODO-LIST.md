@@ -7,13 +7,14 @@
 
 ### 2 - Able to add a product : 
 implemented
+-pending : solve handle the input data as an array of developers (up to 5) in the add product modal
 
 ### 3 - Able to edit an existing product : 
 implemented
 
-- pending : changes reflected immediately. 
--pending : for the add and edit forms, choose correct input type to make data entry easier, as well as data handling in the backend
--pending : for the add and edit forms, add validation on input data (e.g. < 5 developers, only agile and waterfall, etc.)
+- pending : changes reflected immediately. [for now, I'm triggering a page reload to see the changes ]
+- pending : for the add and edit forms, choose correct input type to make data entry easier, as well as data handling in the backend
+- pending : for the add and edit forms, add validation on input data (e.g. < 5 developers, only agile and waterfall, etc.)
 
 -----------------------------------------------------------------------------------------------------------
 
