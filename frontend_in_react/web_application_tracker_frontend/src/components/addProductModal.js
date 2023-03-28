@@ -6,6 +6,9 @@ import Modal from '@mui/material/Modal';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import dayjs, { Dayjs } from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { DateField } from '@mui/x-date-pickers/DateField';
 
 import{
   FormLabel,
@@ -28,6 +31,9 @@ const style = {
 };
 
 export default function AddProductModal() {
+
+  dayjs.extend(customParseFormat)
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -36,7 +42,7 @@ export default function AddProductModal() {
   const [scrumMasterName, setScrumMasterName] = useState("")
   const [productOwnerName, setProductOwnerName] = useState("")
   const [Developers, setDevelopers] = useState([])
-  const [startDate, setStartDate] = useState("")
+  const [startDate, setStartDate] = useState(dayjs());//calling dayjs without date returns date w / current date and time
   const [methodology, setMethodology] = useState("")
   const formComplete = (productName && scrumMasterName && productOwnerName && Developers && startDate && methodology)
 
@@ -45,13 +51,13 @@ export default function AddProductModal() {
   };
 
   function handleAddNewProduct(){
-
+    
     let data = {
       "productName" : productName,
       "scrumMasterName" : scrumMasterName,
       "productOwnerName" : productOwnerName,
       "Developers" : Developers,
-      "startDate" : startDate,
+      "startDate" : startDate.format("YYYY-MM-DD"),
       "methodology" : methodology
     }
     console.log(" current setup : ", data)
@@ -68,7 +74,7 @@ export default function AddProductModal() {
     .then((data) => {
       console.log(data)
       setOpen(false)
-      document.location.reload()//check syntax
+      // document.location.reload()//check syntax
     })
     .catch((error) => {
       console.log(error)
@@ -111,6 +117,7 @@ export default function AddProductModal() {
                 value={productName}
                 onChange={(event) => setProductName(event.target.value)}
                 variant="outlined" 
+                inputProps={{maxLength:50}}
               />
             </Grid>
 
@@ -121,6 +128,7 @@ export default function AddProductModal() {
                 value={scrumMasterName}
                 onChange={(event) => setScrumMasterName(event.target.value)}
                 variant="outlined" 
+                inputProps={{maxLength:50}}
               />
             </Grid>
 
@@ -131,6 +139,7 @@ export default function AddProductModal() {
                 value={productOwnerName}
                 onChange={(event) => setProductOwnerName(event.target.value)}
                 variant="outlined" 
+                inputProps={{maxLength:50}}
               />
             </Grid>
 
@@ -146,11 +155,11 @@ export default function AddProductModal() {
 
             <Grid item xs={12}>
               <FormLabel>Start Date</FormLabel>
-              <TextField 
+              <DateField
                 fullWidth
                 value={startDate}
-                onChange={(event) => setStartDate(event.target.value)}
-                variant="outlined"               
+                onChange={(newValue) => setStartDate(newValue.format('YYYY-MM-DD'))}
+                format="YYYY-MM-DD"
               />
             </Grid>
 

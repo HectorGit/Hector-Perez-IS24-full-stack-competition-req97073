@@ -12,12 +12,9 @@ implemented
 implemented
 
 ### conditions to take into considaration : 
-changes reflected immediately, when click the 'save/update/delete' the window must close, changes must persist on page reload (added 2023-03-27)
-should all string/varchar fields have a max allowed length?
-is there an MUI component to handle receiving a datetime input?
-for methodology, only Waterfall and Agile are valid choices
-for developers, it can be anywhere between 1 and 5 - what input would be better suited to intake this data so that it's easier to parse as array and pass to the backend?
 
+- possible improvement 1 : instead of 'location.reload' use redux to dispatch refetch
+- possible improvement 2 : instead of current setup, make the 5 developer entry better for user, and also handle it as a list in the backend.
 -----------------------------------------------------------------------------------------------------------
 
 ## BONUSES 

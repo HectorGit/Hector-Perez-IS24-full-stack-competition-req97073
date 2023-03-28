@@ -7,7 +7,9 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import EditIcon from '@mui/icons-material/Edit';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-
+import dayjs, { Dayjs } from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { DateField } from '@mui/x-date-pickers/DateField';
 
 import{
   FormLabel,
@@ -31,6 +33,8 @@ const style = {
 
 export default function EditProductModal(props) {
 
+  dayjs.extend(customParseFormat)
+
   let currentProduct = props.product
 
   const [open, setOpen] = React.useState(false);
@@ -42,7 +46,7 @@ export default function EditProductModal(props) {
   const [scrumMasterName, setScrumMasterName] = useState(currentProduct.scrumMasterName)
   const [productOwnerName, setProductOwnerName] = useState(currentProduct.productOwnerName)
   const [Developers, setDevelopers] = useState(currentProduct.Developers)
-  const [startDate, setStartDate] = useState(currentProduct.startDate)
+  const [startDate, setStartDate] = useState(dayjs(currentProduct.startDate));
   const [methodology, setMethodology] = useState(currentProduct.methodology)
   const formComplete = (productName && scrumMasterName && productOwnerName && Developers && startDate && methodology)
 
@@ -52,6 +56,8 @@ export default function EditProductModal(props) {
 
   function handleUpdateProduct(){
 
+    console.log("handleUpdateProduct : dayjs startDate ", startDate.format('YYYY-MM-DD'))
+
     let productId = currentProduct.productId
     console.log("handle_update_product - productId : ", currentProduct.productId)
 
@@ -60,7 +66,7 @@ export default function EditProductModal(props) {
       "scrumMaster" : scrumMasterName,
       "productOwner" : productOwnerName,
       "developers" : Developers,
-      "startDate" : startDate,
+      "startDate" : startDate.format('YYYY-MM-DD'),
       "methodology" : methodology
     }
     console.log(" update data : ", update_data)
@@ -77,7 +83,7 @@ export default function EditProductModal(props) {
     .then((data) => {
       console.log(data)
       setOpen(false)
-      document.location.reload()//check syntax
+      // document.location.reload()//check syntax
     })
     .catch((error) => {
       console.log(error)
@@ -120,6 +126,7 @@ export default function EditProductModal(props) {
                 value={productName}
                 onChange={(event) => setProductName(event.target.value)}
                 variant="outlined" 
+                inputProps={{maxLength:50}}
               />
             </Grid>
 
@@ -130,6 +137,7 @@ export default function EditProductModal(props) {
                 value={scrumMasterName}
                 onChange={(event) => setScrumMasterName(event.target.value)}
                 variant="outlined" 
+                inputProps={{maxLength:50}}
               />
             </Grid>
 
@@ -140,6 +148,7 @@ export default function EditProductModal(props) {
                 value={productOwnerName}
                 onChange={(event) => setProductOwnerName(event.target.value)}
                 variant="outlined" 
+                inputProps={{maxLength:50}}
               />
             </Grid>
 
@@ -155,11 +164,11 @@ export default function EditProductModal(props) {
 
             <Grid item xs={12}>
               <FormLabel>Start Date</FormLabel>
-              <TextField 
+              <DateField
                 fullWidth
                 value={startDate}
-                onChange={(event) => setStartDate(event.target.value)}
-                variant="outlined"               
+                onChange={(newValue) => setStartDate(newValue)}
+                format="YYYY-MM-DD"
               />
             </Grid>
 
