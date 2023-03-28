@@ -7,17 +7,22 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchProducts = createAsyncThunk(
   "product/fetchProducts",
     async() => {
+
+        let payload = []
+
         await fetch("http://localhost:3000/api/products", {mode:"cors"})
         .then((response) => response.json() )
         .then((data) => {
             console.log(data)
-            return data
-        })
+            payload = data
+          })
+        
+        return payload
     }
 );
 
 
-const productDataSlide = createSlice({
+const productDataSlice = createSlice({
   name: 'product',
   initialState: {products:[], products_by_scrum_master:[], products_by_developer:[]},
   reducers: {
@@ -41,6 +46,7 @@ const productDataSlide = createSlice({
           //
         })
         .addCase(fetchProducts.fulfilled, (state, action) => {
+          console.log("fulfilled, payload :", action)
           state.products = action.payload;
         })
         .addCase(fetchProducts.rejected, (state, action) => {

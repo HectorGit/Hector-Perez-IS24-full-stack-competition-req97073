@@ -9,8 +9,18 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 
+//state management : 
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from './../redux/productReducer';
+
 //maybe it'd be good to turn this into react component to be able to use lifecycle method componentDidMount to initially fetch all the existing products
 function ProductsPage() {
+
+  const dispatch = useDispatch()
+  dispatch(fetchProducts())
+
+  // let reduxProducts = useSelector( store => store.product.products )
+  // console.log("reduxProducts : ", reduxProducts)
 
   let [products, setProducts] = useState([])
   let [scrumMasterNames, setScrumMasterNames] = useState([]) //used for the dropdown, derived from the initial products pull
