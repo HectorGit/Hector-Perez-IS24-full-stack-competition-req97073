@@ -11,6 +11,7 @@ implemented
 ### 3 - Able to edit an existing product : 
 implemented
 
+- pending : changes reflected immediately. 
 -pending : for the add and edit forms, choose correct input type to make data entry easier, as well as data handling in the backend
 -pending : for the add and edit forms, add validation on input data (e.g. < 5 developers, only agile and waterfall, etc.)
 
@@ -26,17 +27,11 @@ pending frontend (although it probably will be similar to the above)
 
 ### C- Swagger documentation of the endpoints
 implemented 
--pending (further refinement)
 
 -----------------------------------------------------------------------------------------------------------
 
 ## OTHER 
 
 ### Thoughts : 
-turn the productsPage (currently a function) into a react component to use lifecycle method to load data on component load
 update readme before submitting
-
-### Future optimizations : 
-redux to cache the data, and actual database (?)
-
 -----------------------------------------------------------------------------------------------------------

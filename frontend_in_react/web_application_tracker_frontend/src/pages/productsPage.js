@@ -23,10 +23,30 @@ function ProductsPage() {
     setScrumMasterSelected(e.target.value);
   };
 
+  //fetch the data without user having to click a button
+  useEffect(() => {
+    fetch("http://localhost:3000/api/products", {mode:"cors"})
+    .then((response) => response.json() )
+    .then((data) => {
+      setProducts(data)
+      console.log(data)
+    })
+    .catch((error) => {
+      console.log(error)
+    });
+  }, [])
+
   //drafting. extrat this info to use in dropdowns to trigger filtering
   useEffect(() => {
 
-    let scrum_master_names = products.map((product) => product.scrumMasterName)
+    let scrum_master_names = []
+
+    products.forEach((p) => {
+        if (!scrum_master_names.includes(p.scrumMasterName)) {
+          scrum_master_names.push(p.scrumMasterName);
+        }
+    });
+
     console.log("scrum_master_names", scrum_master_names)
     setScrumMasterNames(scrum_master_names)
     //setDeveloperNames(products.map((product) => product.Developers))
