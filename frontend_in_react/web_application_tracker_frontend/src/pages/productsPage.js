@@ -23,6 +23,10 @@ function ProductsPage() {
     setScrumMasterSelected(e.target.value);
   };
 
+  const handleDeveloperSelected = (e) => {
+    setDeveloperSelected(e.target.value);
+  };
+
   //fetch the data without user having to click a button
   useEffect(() => {
     fetch("http://localhost:3000/api/products", {mode:"cors"})
@@ -40,6 +44,7 @@ function ProductsPage() {
   useEffect(() => {
 
     let scrum_master_names = []
+    let developer_names = []
 
     products.forEach((p) => {
         if (!scrum_master_names.includes(p.scrumMasterName)) {
@@ -47,9 +52,18 @@ function ProductsPage() {
         }
     });
 
+    products.forEach((p) => {
+      p.Developers.forEach((d)=>{
+        if (!developer_names.includes(d)) {
+          developer_names.push(d);
+        }
+      })
+    })
+
     console.log("scrum_master_names", scrum_master_names)
     setScrumMasterNames(scrum_master_names)
-    //setDeveloperNames(products.map((product) => product.Developers))
+    console.log("developer_names", developer_names)
+    setDeveloperNames(developer_names)
   }, [products])
 
   function handleDisplayAllProducts(){
@@ -129,10 +143,32 @@ function ProductsPage() {
         </Grid>
 
         <Grid item xs={10}>
-          <Button sx={{color:'black', width:'300px', bgcolor:"lightblue", marginY:"15px"}} onClick={()=>handleDisplayProductsByDeveloper('Harriett')}>
-            Display Products By Selected Developer <VisibilityIcon fontSize='large'/>
-          </Button>
-        </Grid>
+            { products.length > 0 &&
+              <>
+                <InputLabel id="scrum-master-filter-label">Filter by Developer</InputLabel>
+                <Select
+                  labelId="scrum-master-filter-label"
+                  id="scrum-master-filter"
+                  value={developerSelected}
+                  label="Developer Selected"
+                  onChange={handleDeveloperSelected}
+                  sx={{width:'150px'}}
+                >
+                  {
+                    developerNames.map((developerName) => {
+                      return (<MenuItem value={developerName}>{developerName}</MenuItem>)
+                    })
+                  }
+                </Select>
+                <Button sx={{color:'black', width:'150px', bgcolor:"lightblue", marginY:"15px"}} onClick={()=>handleDisplayProductsByDeveloper(developerSelected)}>
+                  Filter <FilterListIcon fontSize='large'/>
+                </Button>
+                <Button sx={{color:'black', width:'150px', bgcolor:"lightblue", marginY:"15px"}} onClick={handleDisplayAllProducts}>
+                  Reset <RestartAltIcon fontSize='large'/>
+                </Button>
+              </>
+            }
+          </Grid>
 
 
         <Grid item xs={10}>

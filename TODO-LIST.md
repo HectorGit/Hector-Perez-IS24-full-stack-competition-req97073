@@ -3,11 +3,10 @@
 ## BASE REQUIREMENTS
 
 ### 1 - See a list of all products 
-- pending : touch up the dummy data to create more groupings of projects that same developer or same scrum master participated in
+implemented 
 
 ### 2 - Able to add a product : 
 implemented
--pending : solve handle the input data as an array of developers (up to 5) in the add product modal
 
 ### 3 - Able to edit an existing product : 
 implemented
@@ -27,7 +26,7 @@ for developers, it can be anywhere between 1 and 5 - what input would be better 
 implemented 
 
 ### B- Filter by developer. (right now specific developer hardcoded)
-pending frontend (although it probably will be similar to the above)
+implemented
 
 ### C- Swagger documentation of the endpoints
 implemented 
