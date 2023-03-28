@@ -12,21 +12,27 @@ implemented
 ### 3 - Able to edit an existing product : 
 implemented
 
-- pending : changes reflected immediately. [for now, I'm triggering a page reload to see the changes ]
-- pending : for the add and edit forms, choose correct input type to make data entry easier, as well as data handling in the backend
-- pending : for the add and edit forms, add validation on input data (e.g. < 5 developers, only agile and waterfall, etc.)
+### conditions to take into considaration : 
+changes reflected immediately, when click the 'save/update/delete' the window must close, changes must persist on page reload (added 2023-03-27)
+should all string/varchar fields have a max allowed length?
+is there an MUI component to handle receiving a datetime input?
+for methodology, only Waterfall and Agile are valid choices
+for developers, it can be anywhere between 1 and 5 - what input would be better suited to intake this data so that it's easier to parse as array and pass to the backend?
 
 -----------------------------------------------------------------------------------------------------------
 
 ## BONUSES 
 
-### A- Filter by scrum master. (right now specific scrum master hardcoded)
+### A- Filter by scrum master
 implemented 
 
 ### B- Filter by developer. (right now specific developer hardcoded)
 pending frontend (although it probably will be similar to the above)
 
 ### C- Swagger documentation of the endpoints
+implemented 
+
+### D- Able to delete a product 
 implemented 
 
 -----------------------------------------------------------------------------------------------------------
