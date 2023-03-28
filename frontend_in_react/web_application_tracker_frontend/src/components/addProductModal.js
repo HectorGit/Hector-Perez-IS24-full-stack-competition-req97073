@@ -160,7 +160,7 @@ export default function AddProductModal() {
                   id="methodology-filter"
                   value={methodology}
                   label="Methodology"
-                  onChange={hangleMethodologySelected}
+                  onChange={handleMethodologySelected}
                   sx={{width:'150px'}}
                 >
                   <MenuItem value={'Waterfall'}>Waterfall</MenuItem>
