@@ -97,15 +97,18 @@ export default function DeleteProductModal(props) {
                 Product Owner Name : {currentProduct.productOwnerName}
               </Typography>
               <Typography>
-                Developers : {
-                  currentProduct.Developers.forEach(developer => {
-                    return(developer)
-                  })
-                }
+                Developers : 
+                <ul>
+                  {currentProduct.Developers.map((developer_name) => {
+                    return(
+                      <li>
+                        {developer_name}
+                      </li>
+                    )})
+                  }
+                </ul>
               </Typography>
-              <Typography>
-                startDate : {currentProduct.startDate}
-              </Typography>
+
               <Typography>
                 startDate : {currentProduct.startDate}
               </Typography>
