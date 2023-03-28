@@ -5,6 +5,9 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import EditIcon from '@mui/icons-material/Edit';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+
 
 import{
   FormLabel,
@@ -42,6 +45,10 @@ export default function EditProductModal(props) {
   const [startDate, setStartDate] = useState(currentProduct.startDate)
   const [methodology, setMethodology] = useState(currentProduct.methodology)
   const formComplete = (productName && scrumMasterName && productOwnerName && Developers && startDate && methodology)
+
+  const handleMethodologySelected = (e) => {
+    setMethodology(e.target.value);
+  };
 
   function handleUpdateProduct(){
 
@@ -158,12 +165,19 @@ export default function EditProductModal(props) {
 
             <Grid item xs={12}>
               <FormLabel>Methodology</FormLabel>
-              <TextField 
-                fullWidth
-                value={methodology}
-                onChange={(event) => setMethodology(event.target.value)}
-                variant="outlined" 
-              />
+              
+                <Select
+                  fullWidth
+                  labelId="methodology-label"
+                  id="methodology-filter"
+                  value={methodology}
+                  label="Methodology"
+                  onChange={handleMethodologySelected}
+                >
+                  <MenuItem value={'Waterfall'}>Waterfall</MenuItem>
+                  <MenuItem value={'Agile'}>Agile</MenuItem>
+                </Select>
+
             </Grid>
 
             {/* DISABLE UNTIL FORM COMPLETE */}

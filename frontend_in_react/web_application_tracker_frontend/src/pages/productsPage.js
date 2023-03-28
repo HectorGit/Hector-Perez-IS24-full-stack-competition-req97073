@@ -8,7 +8,6 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FilterList from '@mui/icons-material/FilterList';
 
 //maybe it'd be good to turn this into react component to be able to use lifecycle method componentDidMount to initially fetch all the existing products
 function ProductsPage() {

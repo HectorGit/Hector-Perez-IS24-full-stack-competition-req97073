@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 import{
   FormLabel,
@@ -155,13 +157,14 @@ export default function AddProductModal() {
             {/* constrain choices, only agile and waterfall */}
             <Grid item xs={12}>
               <FormLabel>Methodology</FormLabel>
-              <Select
+              
+                <Select
+                  fullWidth
                   labelId="methodology-label"
                   id="methodology-filter"
                   value={methodology}
                   label="Methodology"
                   onChange={handleMethodologySelected}
-                  sx={{width:'150px'}}
                 >
                   <MenuItem value={'Waterfall'}>Waterfall</MenuItem>
                   <MenuItem value={'Agile'}>Agile</MenuItem>
