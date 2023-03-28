@@ -67,13 +67,13 @@ function ProductsPage() {
 
   function handleDisplayAllProducts(){
 
-    console.log("clicked, fetching the data")
+    // console.log("clicked, fetching the data")
 
     fetch("http://localhost:3000/api/products", {mode:"cors"})
     .then((response) => response.json() )
     .then((data) => {
       setProducts(data)
-      console.log(data)
+      // console.log(data)
     })
     .catch((error) => {
       console.log(error)

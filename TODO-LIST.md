@@ -12,9 +12,9 @@ implemented
 implemented
 
 ### conditions to take into considaration : 
-- possible improvement 0 : organize components at the top
-- possible improvement 1 : organize the list of developers in the add and edit modals
-- possible improvement 2 : instead of 'location.reload' use redux to dispatch refetch (probably can in a separate branch)
+- aesthetic improvement : organize components at the top
+- aesthetic improvement : organize the list of developers in the add and edit modals
+- functional improvement : instead of 'location.reload' use redux to dispatch refetch (probably can in a separate branch)
 
 -----------------------------------------------------------------------------------------------------------
 
