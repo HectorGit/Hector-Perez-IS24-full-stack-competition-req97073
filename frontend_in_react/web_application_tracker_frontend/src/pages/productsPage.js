@@ -45,7 +45,7 @@ function ProductsPage() {
       // if(products.length == 0){
       //   setProducts(allProducts)
       // }
-  }, [])
+  }, [products])
 
   //drafting. extrat this info to use in dropdowns to trigger filtering
   useEffect(() => {
