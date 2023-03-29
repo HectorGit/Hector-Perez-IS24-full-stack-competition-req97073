@@ -11,16 +11,14 @@ import MenuItem from '@mui/material/MenuItem';
 
 //state management : 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from './../redux/productReducer';
+import { fetchProducts, fetchProductsByDeveloper, fetchProductsByScrumMaster } from './../redux/productReducer';
 
 //maybe it'd be good to turn this into react component to be able to use lifecycle method componentDidMount to initially fetch all the existing products
 function ProductsPage() {
 
   const dispatch = useDispatch()
-  dispatch(fetchProducts())
 
-  // let reduxProducts = useSelector( store => store.product.products )
-  // console.log("reduxProducts : ", reduxProducts)
+  const allProducts = useSelector( store => store.product.products )
 
   let [products, setProducts] = useState([])
   let [scrumMasterNames, setScrumMasterNames] = useState([]) //used for the dropdown, derived from the initial products pull
@@ -38,17 +36,10 @@ function ProductsPage() {
     setScrumMasterSelected(''); //did this to eliminate console log warning out of range, as products get reloaded and this scrum master no longer exists as an option
   };
 
-  //fetch the data without user having to click a button
+  //this may be problematic, as the data will be loaded infinitely... check this later.
   useEffect(() => {
-    fetch("http://localhost:3000/api/products", {mode:"cors"})
-    .then((response) => response.json() )
-    .then((data) => {
-      setProducts(data)
-      // console.log(data)
-    })
-    .catch((error) => {
-      console.log(error)
-    });
+    dispatch(fetchProducts())
+    setProducts(allProducts)
   }, [])
 
   //drafting. extrat this info to use in dropdowns to trigger filtering
@@ -78,50 +69,21 @@ function ProductsPage() {
   }, [products])
 
   function handleDisplayAllProducts(){
-
-    // console.log("clicked, fetching the data")
-
-    fetch("http://localhost:3000/api/products", {mode:"cors"})
-    .then((response) => response.json() )
-    .then((data) => {
-      setProducts(data)
-      // console.log(data)
-    })
-    .catch((error) => {
-      console.log(error)
-    });
+    setProducts(allProducts)
   }
 
   //currently scrum master name hardcoded below in the button
   function handleDisplayProductsByScrumMaster(scrum_master_name){
-
-    console.log("by scrum master : ", scrum_master_name)
-
-    fetch(`http://localhost:3000/api/products_by_scrum_master/${scrum_master_name}`, {mode:"cors"})
-    .then((response) => response.json() )
-    .then((data) => {
-      setProducts(data)
-      console.log(data)
-    })
-    .catch((error) => {
-      console.log(error)
-    });
+    dispatch(fetchProductsByScrumMaster(scrum_master_name))
+    // setProducts(scrum_master_name)
+    setDeveloperSelected('')
   }
 
   //currently developer name hardcoded below in the button
   function handleDisplayProductsByDeveloper(developer_name){
-
-    console.log("by developer", developer_name)
-
-    fetch(`http://localhost:3000/api/products_by_developer/${developer_name}`, {mode:"cors"})
-    .then((response) => response.json() )
-    .then((data) => {
-      setProducts(data)
-      console.log(data)
-    })
-    .catch((error) => {
-      console.log(error)
-    });
+    dispatch(fetchProductsByDeveloper(developer_name))
+    // setProducts(developer_name)
+    setScrumMasterSelected('')
   }
 
   return (
