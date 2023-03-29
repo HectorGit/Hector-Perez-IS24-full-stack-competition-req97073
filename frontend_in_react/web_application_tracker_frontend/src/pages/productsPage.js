@@ -118,17 +118,17 @@ function ProductsPage() {
       sx = {{height:"300px"}}
       >
 
-        <Grid item xs={2} spacing={0}>
+        <Grid item xs={12} md={2} spacing={0}>
           <AddProductModal/>
         </Grid>   
-        <Grid item xs={2} spacing={0}>
+        <Grid item xs={12} md={2} spacing={0}>
           <Button sx={{color:'black', width:"90%", bgcolor:"lightblue"}} onClick={handleDisplayAllProducts}>
             Display All Products <VisibilityIcon fontSize='large'/>
           </Button>
         </Grid>   
 
 
-        <Grid item xs={4} spacing={0}>
+        <Grid item xs={12} md={4} spacing={0}>
             { products.length > 0 &&
               <>
                 <InputLabel shrink id="scrum-master-filter-label">By Developer</InputLabel>
@@ -157,7 +157,7 @@ function ProductsPage() {
           </Grid>
 
 
-        <Grid item xs={3} spacing={0}>
+        <Grid item xs={12} md={3} spacing={0}>
 
 
           { products.length > 0 &&
@@ -188,7 +188,7 @@ function ProductsPage() {
 
         </Grid>
 
-        <Grid item xs={10}>
+        <Grid item xs={10} md={12}>
           <ProductTable products={products}/>
         </Grid>
         
