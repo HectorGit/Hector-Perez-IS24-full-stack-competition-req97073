@@ -88,8 +88,8 @@ export default function EditProductModal(props) {
 
     let request_body = {
       "productName" : productName,
-      "scrumMaster" : scrumMasterName,
-      "productOwner" : productOwnerName,
+      "scrumMasterName" : scrumMasterName,
+      "productOwnerName" : productOwnerName,
       "Developers" : Developers,
       "startDate" : startDate.format('YYYY-MM-DD'),
       "methodology" : methodology

@@ -2,8 +2,8 @@
   "all_products": [
     {
       "productId": 1,
-      "productName": "Support Environmental Asset",
-      "productOwnerName": "Frank",
+      "productName": "Support Environmental",
+      "productOwnerName": "Pierce",
       "Developers": [
         "Leblanc",
         "Bessie",
@@ -11,7 +11,7 @@
         "Rochelle",
         "Harriet"
       ],
-      "scrumMasterName": "Pierce",
+      "scrumMasterName": "Frank",
       "startDate": "2018-04-25",
       "methodology": "Waterfall"
     },
