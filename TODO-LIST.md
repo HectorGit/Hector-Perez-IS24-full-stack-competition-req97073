@@ -11,12 +11,11 @@ implemented
 ### 3 - Able to edit an existing product : 
 implemented
 
-### conditions to take into considaration : 
-- *** in this branch, implementing a redux version of the code (the only difference will be state management)
-- aesthetic improvement : organize the list of developers in the add and edit modals
-- aesthetic improvement : organize components at the top
+### possible improvements :
+-product list show on page load
+-elements may look better if reorganized (purely aesthetic)
 
------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 
 ## BONUSES 
 
@@ -32,10 +31,10 @@ implemented
 ### D- Able to delete a product 
 implemented 
 
------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------
 
 ## OTHER 
 
 ### Thoughts : 
 update readme before submitting
------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------
