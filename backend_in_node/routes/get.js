@@ -15,7 +15,7 @@ getrouter.get("/products",
     async (req, res) => {
         let rawdata = fs.readFileSync('products_data.json');
         let products = JSON.parse(rawdata)['all_products'];
-        console.log(products);
+        console.log('GET /products');
         return res.status(200).send(products);
     }
 );
@@ -25,18 +25,16 @@ getrouter.get("/products_by_scrum_master/:scrum_master_name", (req, res) => {
     let rawdata = fs.readFileSync('products_data.json');
     let products = JSON.parse(rawdata)['all_products'];
     products_filtered_by_scrum_master_name = products.filter( p => p.scrumMasterName == scrum_master_name)
-    console.log(products_filtered_by_scrum_master_name);
+    console.log('GET /products_by_scrum_master/', scrum_master_name);
     return res.status(200).send(products_filtered_by_scrum_master_name);
 });
 
 getrouter.get("/products_by_developer/:developer_name", (req, res) => {
     developer_name = req.params.developer_name
-    console.log("developer_name : ", developer_name)
     let rawdata = fs.readFileSync('products_data.json');
     let products = JSON.parse(rawdata)['all_products'];
-    console.log(products);
     products_filtered_by_developer = products.filter( p => p.Developers.find(name => developer_name === name))
-    console.log(products_filtered_by_developer);
+    console.log('GET /products_by_developer', developer_name);
     return res.status(200).send(products_filtered_by_developer);
 });
 

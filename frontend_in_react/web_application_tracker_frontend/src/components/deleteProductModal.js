@@ -43,13 +43,9 @@ export default function DeleteProductModal(props) {
   let currentProduct = props.product
 
   function handleDeleteProduct(){
-
-    console.log("product_to_delete : ", currentProduct)
-
     dispatch(fetchDeleteProduct(currentProduct.productId)) //to write the new product
     dispatch(fetchProducts()) //to refresh what's shown on the page
     handleClose()
-    
   }
 
   return (

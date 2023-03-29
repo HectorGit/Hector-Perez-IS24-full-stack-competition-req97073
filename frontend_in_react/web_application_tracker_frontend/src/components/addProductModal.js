@@ -75,9 +75,7 @@ export default function AddProductModal() {
 
   //removes developer from the temporary list of developers that are part of the project
   function handleRemoveDeveloper(developer){
-    console.log("developer to remove : ", developer)
     setDevelopers(Developers.filter( d => d != developer))
-    console.log("remove:",Developers)
   };
 
   function handleAddNewProduct(){
@@ -90,7 +88,6 @@ export default function AddProductModal() {
       "startDate" : startDate.format("YYYY-MM-DD"),
       "methodology" : methodology
     }
-    console.log(" current setup : ", request_body)
 
     dispatch(fetchAddProduct(request_body)) //to write the new product
     dispatch(fetchProducts()) //to refresh what's shown on the page

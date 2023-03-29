@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import AddProductModal from '../components/addProductModal';
 import ProductTable from '../components/productTable';
-import { Grid , Button} from '@mui/material';
+import { Grid , Button, alpha} from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
@@ -38,18 +38,17 @@ function ProductsPage() {
     setScrumMasterSelected(''); //did this to eliminate console log warning out of range, as products get reloaded and this scrum master no longer exists as an option
   };
 
-  //TODO: initially populate the page
-  //perhaps some sort of boolean value in the dependency array ?
+  //load if update, delete , edit succeeds
   useEffect(() => {
-    if(products.length == 0){
-      setProducts(allProducts)
-    }
+    setProducts(allProducts)
   }, [allProducts])
 
+  //load if filter by scrum master
   useEffect(() => {
     setProducts(productsByScrumMaster)
   }, [productsByScrumMaster])
 
+  //load if filter by developer
   useEffect(() => {
     setProducts(productsByDeveloper)
   }, [productsByDeveloper])
@@ -74,14 +73,12 @@ function ProductsPage() {
       })
     })
 
-    // console.log("scrum_master_names", scrum_master_names)
     setScrumMasterNames(scrum_master_names)
-    // console.log("developer_names", developer_names)
     setDeveloperNames(developer_names)
   }, [products])
 
   function handleDisplayAllProducts(){
-    setProducts(allProducts)
+    dispatch(fetchProducts())
     setDeveloperSelected('')
     setScrumMasterSelected('')
   }
@@ -189,7 +186,7 @@ function ProductsPage() {
 
         <Grid item xs={10}>
           <ProductTable products={products}/>
-        </Grid>   
+        </Grid>
         
       </Grid> 
 

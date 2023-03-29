@@ -74,15 +74,12 @@ export default function EditProductModal(props) {
       if(developerToAdd!=""){
         setDevelopers([...Developers, developerToAdd])
         setDeveloperToAdd("");//clear it
-        console.log("after add:",Developers)
       }
     }
   };
 
   function handleRemoveDeveloper(developer){
-    console.log("developer to remove : ", developer)
     setDevelopers(Developers.filter( d => d != developer))
-    console.log("after remove:",Developers)
   };
 
   function handleUpdateProduct(){
@@ -97,7 +94,6 @@ export default function EditProductModal(props) {
       "startDate" : startDate.format('YYYY-MM-DD'),
       "methodology" : methodology
     }
-    console.log(" request_body: ", request_body)
     
     dispatch(fetchUpdateProduct([productId,request_body]))
     dispatch(fetchProducts())
