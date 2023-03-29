@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import AddProductModal from '../components/addProductModal';
 import ProductTable from '../components/productTable';
-import { Grid , Button, alpha} from '@mui/material';
+import { Grid , Button, Box, alpha} from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
@@ -12,6 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 //state management : 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts, fetchProductsByDeveloper, fetchProductsByScrumMaster } from './../redux/productReducer';
+import { width } from '@mui/system';
 
 //maybe it'd be good to turn this into react component to be able to use lifecycle method componentDidMount to initially fetch all the existing products
 function ProductsPage() {
@@ -98,41 +99,44 @@ function ProductsPage() {
   return (
     <div>
 
+      <Box >
+        <h1>
+            BC Government Products
+          </h1>        
+          <p>
+            Total number of products : {products.length}
+          </p>
+      </Box>
+
       <Grid
       container
       spacing={0}
       direction="row"
       alignItems="center"
       justifyContent="center"
+      // alignSelf="center"
+      sx = {{height:"300px"}}
       >
-        <Grid item xs={10}>
-          <h1>
-            BC Government Products
-          </h1>        
-          <p>
-            Total number of products : {products.length}
-          </p>
-        </Grid>   
 
-        <Grid item xs={10}>
+        <Grid item xs={2} spacing={0}>
           <AddProductModal/>
         </Grid>   
-
-        <Grid item xs={10}>
-          <Button sx={{color:'black', width:'300px', bgcolor:"lightblue", marginY:"15px"}} onClick={handleDisplayAllProducts}>
+        <Grid item xs={2} spacing={0}>
+          <Button sx={{color:'black', width:"90%", bgcolor:"lightblue"}} onClick={handleDisplayAllProducts}>
             Display All Products <VisibilityIcon fontSize='large'/>
           </Button>
-        </Grid>
+        </Grid>   
 
-        <Grid item xs={10}>
+
+        <Grid item xs={4} spacing={0}>
             { products.length > 0 &&
               <>
-                <InputLabel id="scrum-master-filter-label">Filter by Developer</InputLabel>
+                <InputLabel shrink id="scrum-master-filter-label">By Developer</InputLabel>
                 <Select
-                  labelId="scrum-master-filter-label"
+                  // labelId="scrum-master-filter-label"
                   id="scrum-master-filter"
                   value={developerSelected}
-                  label="Developer Selected"
+                  label="By Developer"
                   onChange={handleDeveloperSelected}
                   sx={{width:'150px'}}
                 >
@@ -153,17 +157,17 @@ function ProductsPage() {
           </Grid>
 
 
-        <Grid item xs={10}>
+        <Grid item xs={3} spacing={0}>
 
 
           { products.length > 0 &&
             <>
-              <InputLabel id="scrum-master-filter-label">Filter by Scrum Master</InputLabel>
+              <InputLabel shrink id="scrum-master-filter-label">By Scrum Master</InputLabel>
               <Select
                 labelId="scrum-master-filter-label"
                 id="scrum-master-filter"
                 value={scrumMasterSelected}
-                label="Scrum Master Selected"
+                label="By Scrum Master"
                 onChange={handleChangeScrumMasterSelected}
                 sx={{width:'150px'}}
               >

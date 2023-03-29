@@ -172,9 +172,9 @@ export default function EditProductModal(props) {
             <Grid item xs = {12}>
               { Developers.length > 0 && Developers.map( (developer) => {
                   return(
-                    <Stack key={"stack-"+developer} direction = "row" >
-                      <Typography>{developer}</Typography>
-                      <Button type="button" variant="contained" onClick={()=>handleRemoveDeveloper(developer)}><PersonRemoveIcon fontSize='small'/></Button>
+                    <Stack key={"stack-"+developer} direction = "row" sx={{marginY:"5px"}}>
+                      <Typography sx={{width:"70%"}}>{developer}</Typography>
+                      <Button sx={{width:"30%"}} type="button" variant="contained" onClick={()=>handleRemoveDeveloper(developer)}>Remove<PersonRemoveIcon fontSize='small'/></Button>
                     </Stack>
                   )
                 })
