@@ -19,12 +19,16 @@ function ProductsPage() {
   const dispatch = useDispatch()
 
   const allProducts = useSelector( store => store.product.products )
+  const productsByScrumMaster = useSelector( store => store.product.products_by_scrum_master )
+  const productsByDeveloper = useSelector( store => store.product.products_by_developer )
 
   let [products, setProducts] = useState([])
   let [scrumMasterNames, setScrumMasterNames] = useState([]) //used for the dropdown, derived from the initial products pull
   let [developerNames, setDeveloperNames] = useState([])     //used foro the dropdown, derived from the initial products pull
   let [scrumMasterSelected, setScrumMasterSelected] = useState("")
   let [developerSelected, setDeveloperSelected] = useState("")
+
+
 
   const handleChangeScrumMasterSelected = (e) => {
     setScrumMasterSelected(e.target.value);
@@ -36,10 +40,13 @@ function ProductsPage() {
     setScrumMasterSelected(''); //did this to eliminate console log warning out of range, as products get reloaded and this scrum master no longer exists as an option
   };
 
-  //this may be problematic, as the data will be loaded infinitely... check this later.
+  //TODO: initially populate the page
+  //perhaps some sort of boolean value in the dependency array ?
   useEffect(() => {
     dispatch(fetchProducts())
-    setProducts(allProducts)
+    // if(products.length == 0){
+    //   setProducts(allProducts)
+    // }
   }, [])
 
   //drafting. extrat this info to use in dropdowns to trigger filtering
@@ -70,19 +77,21 @@ function ProductsPage() {
 
   function handleDisplayAllProducts(){
     setProducts(allProducts)
+    setDeveloperSelected('')
+    setScrumMasterSelected('')
   }
 
   //currently scrum master name hardcoded below in the button
   function handleDisplayProductsByScrumMaster(scrum_master_name){
     dispatch(fetchProductsByScrumMaster(scrum_master_name))
-    // setProducts(scrum_master_name)
+    setProducts(productsByScrumMaster)
     setDeveloperSelected('')
   }
 
   //currently developer name hardcoded below in the button
   function handleDisplayProductsByDeveloper(developer_name){
     dispatch(fetchProductsByDeveloper(developer_name))
-    // setProducts(developer_name)
+    setProducts(productsByDeveloper)
     setScrumMasterSelected('')
   }
 
