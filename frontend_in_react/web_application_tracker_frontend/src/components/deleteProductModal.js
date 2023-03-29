@@ -9,6 +9,10 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
+//state management : 
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts, fetchDeleteProduct } from './../redux/productReducer';
+
 import{
   FormLabel,
   TextField,
@@ -30,6 +34,9 @@ const style = {
 };
 
 export default function DeleteProductModal(props) {
+
+  const dispatch = useDispatch()
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -39,20 +46,9 @@ export default function DeleteProductModal(props) {
 
     console.log("product_to_delete : ", currentProduct)
 
-    fetch(`http://localhost:3000/api/delete_product/${currentProduct.productId}`, {
-      mode:"cors", 
-      method:"DELETE"
-    })
-    .then((response) => response.json() )
-    .then((data) => {
-      console.log(data)
-      setOpen(false)
-      document.location.reload()//check syntax
-    })
-    .catch((error) => {
-      console.log(error)
-    });
-
+    dispatch(fetchDeleteProduct(currentProduct.productId)) //to write the new product
+    dispatch(fetchProducts()) //to refresh what's shown on the page
+    handleClose()
     
   }
 

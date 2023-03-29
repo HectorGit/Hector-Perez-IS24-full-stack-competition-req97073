@@ -28,8 +28,6 @@ function ProductsPage() {
   let [scrumMasterSelected, setScrumMasterSelected] = useState("")
   let [developerSelected, setDeveloperSelected] = useState("")
 
-
-
   const handleChangeScrumMasterSelected = (e) => {
     setScrumMasterSelected(e.target.value);
     setDeveloperSelected('');
@@ -44,9 +42,9 @@ function ProductsPage() {
   //perhaps some sort of boolean value in the dependency array ?
   useEffect(() => {
     dispatch(fetchProducts())
-    // if(products.length == 0){
-    //   setProducts(allProducts)
-    // }
+      // if(products.length == 0){
+      //   setProducts(allProducts)
+      // }
   }, [])
 
   //drafting. extrat this info to use in dropdowns to trigger filtering

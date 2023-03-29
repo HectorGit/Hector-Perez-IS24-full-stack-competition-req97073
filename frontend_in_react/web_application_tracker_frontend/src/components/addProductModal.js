@@ -12,6 +12,10 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 
+//state management : 
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts,fetchAddProduct } from '../redux/productReducer';
+
 import{
   FormLabel,
   TextField,
@@ -34,6 +38,7 @@ const style = {
 
 export default function AddProductModal() {
 
+  const dispatch = useDispatch()
   dayjs.extend(customParseFormat)
 
   const [open, setOpen] = React.useState(false);
@@ -68,6 +73,7 @@ export default function AddProductModal() {
     }
   };
 
+  //removes developer from the temporary list of developers that are part of the project
   function handleRemoveDeveloper(developer){
     console.log("developer to remove : ", developer)
     setDevelopers(Developers.filter( d => d != developer))
@@ -76,7 +82,7 @@ export default function AddProductModal() {
 
   function handleAddNewProduct(){
     
-    let data = {
+    let request_body = {
       "productName" : productName,
       "scrumMasterName" : scrumMasterName,
       "productOwnerName" : productOwnerName,
@@ -84,27 +90,11 @@ export default function AddProductModal() {
       "startDate" : startDate.format("YYYY-MM-DD"),
       "methodology" : methodology
     }
-    console.log(" current setup : ", data)
+    console.log(" current setup : ", request_body)
 
-    fetch(`http://localhost:3000/api/add_product`, {
-      mode:"cors", 
-      method:"POST", 
-      body: JSON.stringify(data),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      }    
-    })
-    .then((response) => response.json() )
-    .then((data) => {
-      console.log(data)
-      setOpen(false)
-      document.location.reload()//check syntax
-    })
-    .catch((error) => {
-      console.log(error)
-    });
-
-    
+    dispatch(fetchAddProduct(request_body)) //to write the new product
+    dispatch(fetchProducts()) //to refresh what's shown on the page
+    handleClose()
   }
 
   return (

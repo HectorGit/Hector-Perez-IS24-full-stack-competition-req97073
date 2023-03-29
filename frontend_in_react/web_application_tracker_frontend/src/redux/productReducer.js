@@ -3,7 +3,8 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// must place dispatch(fetchProducts()) in the corresponding location where it'd be good to fetch this data 
+/* GET */
+
 export const fetchProducts = createAsyncThunk(
   "product/fetchProducts",
     async() => {
@@ -57,6 +58,77 @@ export const fetchProductsByDeveloper = createAsyncThunk(
     }
 );
 
+/* POST */
+
+export const fetchAddProduct = createAsyncThunk(
+  "product/fetchAddProduct",
+    async(request_body) => {
+
+        let payload = []
+
+        await fetch(`http://localhost:3000/api/add_product`, {
+          mode:"cors", 
+          method:"POST", 
+          body: JSON.stringify(request_body),
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          }    
+        })
+        .then((response) => response.json() )
+        .then((data) => {
+          payload = data
+        })
+        
+        return `completed fetchAddProduct`
+    }
+);
+
+/* PATCH */
+
+export const fetchUpdateProduct = createAsyncThunk(
+  "product/fetchUpdateProduct",
+    async([productId,request_body]) => {
+
+        let payload = []
+
+        fetch(`http://localhost:3000/api/update_product/${productId}`, {
+          mode:"cors", 
+          method:"PATCH", 
+          body: JSON.stringify(request_body),
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          }    
+        })
+        .then((response) => response.json() )
+        .then((data) => {
+          payload = data
+        })
+        
+        return `completed fetchUpdateProduct`
+    }
+);
+
+/* DELETE */
+
+export const fetchDeleteProduct = createAsyncThunk(
+  "product/fetchDeleteProduct",
+    async(productId) => {
+
+        let payload = []
+
+        await fetch(`http://localhost:3000/api/delete_product/${productId}`, {
+          mode:"cors", 
+          method:"DELETE"
+        })
+        .then((response) => response.json() )
+        .then((data) => {
+          payload = data
+        })
+        
+        return `completed fetchDeleteProduct`
+    }
+);
+
 
 const productDataSlice = createSlice({
   name: 'product',
@@ -107,6 +179,33 @@ const productDataSlice = createSlice({
         })
         .addCase(fetchProductsByDeveloper.rejected, (state, action) => {
           console.log("error in extra reducers (fetchProductsByDeveloper)");
+        })
+        .addCase(fetchAddProduct.pending, (state, action) => {
+          //
+        })
+        .addCase(fetchAddProduct.fulfilled, (state, action) => {
+          console.log("fetchAddProduct complete:", action.payload)
+        })
+        .addCase(fetchAddProduct.rejected, (state, action) => {
+          console.log("error in extra reducers (fetchAddProduct)");
+        })
+        .addCase(fetchUpdateProduct.pending, (state, action) => {
+          //
+        })
+        .addCase(fetchUpdateProduct.fulfilled, (state, action) => {
+          console.log("fetchAddProduct complete:", action.payload)
+        })
+        .addCase(fetchUpdateProduct.rejected, (state, action) => {
+          console.log("error in extra reducers (fetchUpdateProduct)");
+        })
+        .addCase(fetchDeleteProduct.pending, (state, action) => {
+          //
+        })
+        .addCase(fetchDeleteProduct.fulfilled, (state, action) => {
+          console.log("fetchDeleteProduct complete:", action.payload)
+        })
+        .addCase(fetchDeleteProduct.rejected, (state, action) => {
+          console.log("error in extra reducers (fetchDeleteProduct)");
         });
     },
   

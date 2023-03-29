@@ -13,6 +13,10 @@ import { DateField } from '@mui/x-date-pickers/DateField';
 import { Stack } from '@mui/system';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 
+//state management : 
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts,fetchUpdateProduct } from '../redux/productReducer';
+
 import{
   FormLabel,
   TextField,
@@ -34,6 +38,8 @@ const style = {
 };
 
 export default function EditProductModal(props) {
+
+  const dispatch = useDispatch()
 
   dayjs.extend(customParseFormat)
 
@@ -81,12 +87,9 @@ export default function EditProductModal(props) {
 
   function handleUpdateProduct(){
 
-    console.log("handleUpdateProduct : dayjs startDate ", startDate.format('YYYY-MM-DD'))
-
     let productId = currentProduct.productId
-    console.log("handle_update_product - productId : ", currentProduct.productId)
 
-    let update_data = {
+    let request_body = {
       "productName" : productName,
       "scrumMaster" : scrumMasterName,
       "productOwner" : productOwnerName,
@@ -94,26 +97,11 @@ export default function EditProductModal(props) {
       "startDate" : startDate.format('YYYY-MM-DD'),
       "methodology" : methodology
     }
-    console.log(" update data : ", update_data)
+    console.log(" request_body: ", request_body)
     
-    fetch(`http://localhost:3000/api/update_product/${productId}`, {
-      mode:"cors", 
-      method:"PATCH", 
-      body: JSON.stringify(update_data),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      }    
-    })
-    .then((response) => response.json() )
-    .then((data) => {
-      console.log(data)
-      setOpen(false)
-      document.location.reload()//check syntax
-    })
-    .catch((error) => {
-      console.log(error)
-    });
-
+    dispatch(fetchUpdateProduct([productId,request_body]))
+    dispatch(fetchProducts())
+    handleClose()
 
   }
 
