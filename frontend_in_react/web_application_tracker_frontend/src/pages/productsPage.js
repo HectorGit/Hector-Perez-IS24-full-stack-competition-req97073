@@ -22,7 +22,7 @@ function ProductsPage() {
   const productsByScrumMaster = useSelector( store => store.product.products_by_scrum_master )
   const productsByDeveloper = useSelector( store => store.product.products_by_developer )
 
-  let [products, setProducts] = useState([])
+  let [products, setProducts] = useState(allProducts)
   let [scrumMasterNames, setScrumMasterNames] = useState([]) //used for the dropdown, derived from the initial products pull
   let [developerNames, setDeveloperNames] = useState([])     //used foro the dropdown, derived from the initial products pull
   let [scrumMasterSelected, setScrumMasterSelected] = useState("")
@@ -41,11 +41,18 @@ function ProductsPage() {
   //TODO: initially populate the page
   //perhaps some sort of boolean value in the dependency array ?
   useEffect(() => {
-    dispatch(fetchProducts())
-      // if(products.length == 0){
-      //   setProducts(allProducts)
-      // }
-  }, [products])
+    if(products.length == 0){
+      setProducts(allProducts)
+    }
+  }, [allProducts])
+
+  useEffect(() => {
+    setProducts(productsByScrumMaster)
+  }, [productsByScrumMaster])
+
+  useEffect(() => {
+    setProducts(productsByDeveloper)
+  }, [productsByDeveloper])
 
   //drafting. extrat this info to use in dropdowns to trigger filtering
   useEffect(() => {
@@ -82,14 +89,12 @@ function ProductsPage() {
   //currently scrum master name hardcoded below in the button
   function handleDisplayProductsByScrumMaster(scrum_master_name){
     dispatch(fetchProductsByScrumMaster(scrum_master_name))
-    setProducts(productsByScrumMaster)
     setDeveloperSelected('')
   }
 
   //currently developer name hardcoded below in the button
   function handleDisplayProductsByDeveloper(developer_name){
     dispatch(fetchProductsByDeveloper(developer_name))
-    setProducts(productsByDeveloper)
     setScrumMasterSelected('')
   }
 

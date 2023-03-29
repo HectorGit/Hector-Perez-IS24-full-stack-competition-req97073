@@ -12,7 +12,6 @@ implemented
 implemented
 
 ### possible improvements :
--product list show on page load
 -elements may look better if reorganized (purely aesthetic)
 
 ----------------------------------------------------------------------------
