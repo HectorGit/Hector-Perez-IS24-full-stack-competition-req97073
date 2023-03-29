@@ -6,7 +6,7 @@
 
 `cd backend_in_node`
 `npm install`
-`nodemon`
+`npm start`
 
 Open [http://localhost:5000]
 

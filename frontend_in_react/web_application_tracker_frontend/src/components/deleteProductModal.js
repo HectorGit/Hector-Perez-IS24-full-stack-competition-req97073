@@ -44,8 +44,9 @@ export default function DeleteProductModal(props) {
 
   function handleDeleteProduct(){
     dispatch(fetchDeleteProduct(currentProduct.productId)) //to write the new product
-    dispatch(fetchProducts()) //to refresh what's shown on the page
-    handleClose()
+    .then(()=>{console.log("dispatching after") 
+    dispatch(fetchProducts())})
+    .then(handleClose())
   }
 
   return (

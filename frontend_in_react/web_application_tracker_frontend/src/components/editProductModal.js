@@ -96,9 +96,9 @@ export default function EditProductModal(props) {
     }
     
     dispatch(fetchUpdateProduct([productId,request_body]))
-    dispatch(fetchProducts())
-    handleClose()
-
+      .then(()=>{console.log("dispatching after") 
+        dispatch(fetchProducts())})
+      .then(handleClose())
   }
 
   return (

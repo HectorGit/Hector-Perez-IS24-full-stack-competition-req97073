@@ -16,6 +16,8 @@ deleterouter.delete("/delete_product/:product_id",
             "all_products" : products_w_product_removed
         }
 
+        console.log('DELETE /delete_product.')
+
         fs.writeFileSync('products_data.json', JSON.stringify(adjusted_content, null, 2))
 
         return res.status(200).send(adjusted_content)
