@@ -13,6 +13,10 @@ import { DateField } from '@mui/x-date-pickers/DateField';
 import { Stack } from '@mui/system';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 
+//state management : 
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts,fetchUpdateProduct } from '../redux/productReducer';
+
 import{
   FormLabel,
   TextField,
@@ -34,6 +38,8 @@ const style = {
 };
 
 export default function EditProductModal(props) {
+
+  const dispatch = useDispatch()
 
   dayjs.extend(customParseFormat)
 
@@ -68,25 +74,19 @@ export default function EditProductModal(props) {
       if(developerToAdd!=""){
         setDevelopers([...Developers, developerToAdd])
         setDeveloperToAdd("");//clear it
-        console.log("after add:",Developers)
       }
     }
   };
 
   function handleRemoveDeveloper(developer){
-    console.log("developer to remove : ", developer)
     setDevelopers(Developers.filter( d => d != developer))
-    console.log("after remove:",Developers)
   };
 
   function handleUpdateProduct(){
 
-    console.log("handleUpdateProduct : dayjs startDate ", startDate.format('YYYY-MM-DD'))
-
     let productId = currentProduct.productId
-    console.log("handle_update_product - productId : ", currentProduct.productId)
 
-    let update_data = {
+    let request_body = {
       "productName" : productName,
       "scrumMaster" : scrumMasterName,
       "productOwner" : productOwnerName,
@@ -94,27 +94,11 @@ export default function EditProductModal(props) {
       "startDate" : startDate.format('YYYY-MM-DD'),
       "methodology" : methodology
     }
-    console.log(" update data : ", update_data)
     
-    fetch(`http://localhost:3000/api/update_product/${productId}`, {
-      mode:"cors", 
-      method:"PATCH", 
-      body: JSON.stringify(update_data),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      }    
-    })
-    .then((response) => response.json() )
-    .then((data) => {
-      console.log(data)
-      setOpen(false)
-      document.location.reload()//check syntax
-    })
-    .catch((error) => {
-      console.log(error)
-    });
-
-
+    dispatch(fetchUpdateProduct([productId,request_body]))
+      .then(()=>{console.log("dispatching after") 
+        dispatch(fetchProducts())})
+      .then(handleClose())
   }
 
   return (
@@ -188,9 +172,9 @@ export default function EditProductModal(props) {
             <Grid item xs = {12}>
               { Developers.length > 0 && Developers.map( (developer) => {
                   return(
-                    <Stack key={"stack-"+developer} direction = "row" >
-                      <Typography>{developer}</Typography>
-                      <Button type="button" variant="contained" onClick={()=>handleRemoveDeveloper(developer)}><PersonRemoveIcon fontSize='small'/></Button>
+                    <Stack key={"stack-"+developer} direction = "row" sx={{marginY:"5px"}}>
+                      <Typography sx={{width:"70%"}}>{developer}</Typography>
+                      <Button sx={{width:"30%"}} type="button" variant="contained" onClick={()=>handleRemoveDeveloper(developer)}>Remove<PersonRemoveIcon fontSize='small'/></Button>
                     </Stack>
                   )
                 })

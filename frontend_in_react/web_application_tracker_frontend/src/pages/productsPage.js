@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import AddProductModal from '../components/addProductModal';
 import ProductTable from '../components/productTable';
-import { Grid , Button} from '@mui/material';
+import { Grid , Button, Box, alpha} from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
@@ -9,10 +9,21 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 
+//state management : 
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts, fetchProductsByDeveloper, fetchProductsByScrumMaster } from './../redux/productReducer';
+import { width } from '@mui/system';
+
 //maybe it'd be good to turn this into react component to be able to use lifecycle method componentDidMount to initially fetch all the existing products
 function ProductsPage() {
 
-  let [products, setProducts] = useState([])
+  const dispatch = useDispatch()
+
+  const allProducts = useSelector( store => store.product.products )
+  const productsByScrumMaster = useSelector( store => store.product.products_by_scrum_master )
+  const productsByDeveloper = useSelector( store => store.product.products_by_developer )
+
+  let [products, setProducts] = useState(allProducts)
   let [scrumMasterNames, setScrumMasterNames] = useState([]) //used for the dropdown, derived from the initial products pull
   let [developerNames, setDeveloperNames] = useState([])     //used foro the dropdown, derived from the initial products pull
   let [scrumMasterSelected, setScrumMasterSelected] = useState("")
@@ -28,18 +39,20 @@ function ProductsPage() {
     setScrumMasterSelected(''); //did this to eliminate console log warning out of range, as products get reloaded and this scrum master no longer exists as an option
   };
 
-  //fetch the data without user having to click a button
+  //load if update, delete , edit succeeds
   useEffect(() => {
-    fetch("http://localhost:3000/api/products", {mode:"cors"})
-    .then((response) => response.json() )
-    .then((data) => {
-      setProducts(data)
-      // console.log(data)
-    })
-    .catch((error) => {
-      console.log(error)
-    });
-  }, [])
+    setProducts(allProducts)
+  }, [allProducts])
+
+  //load if filter by scrum master
+  useEffect(() => {
+    setProducts(productsByScrumMaster)
+  }, [productsByScrumMaster])
+
+  //load if filter by developer
+  useEffect(() => {
+    setProducts(productsByDeveloper)
+  }, [productsByDeveloper])
 
   //drafting. extrat this info to use in dropdowns to trigger filtering
   useEffect(() => {
@@ -61,61 +74,39 @@ function ProductsPage() {
       })
     })
 
-    // console.log("scrum_master_names", scrum_master_names)
     setScrumMasterNames(scrum_master_names)
-    // console.log("developer_names", developer_names)
     setDeveloperNames(developer_names)
   }, [products])
 
   function handleDisplayAllProducts(){
-
-    // console.log("clicked, fetching the data")
-
-    fetch("http://localhost:3000/api/products", {mode:"cors"})
-    .then((response) => response.json() )
-    .then((data) => {
-      setProducts(data)
-      // console.log(data)
-    })
-    .catch((error) => {
-      console.log(error)
-    });
+    dispatch(fetchProducts())
+    setDeveloperSelected('')
+    setScrumMasterSelected('')
   }
 
   //currently scrum master name hardcoded below in the button
   function handleDisplayProductsByScrumMaster(scrum_master_name){
-
-    console.log("by scrum master : ", scrum_master_name)
-
-    fetch(`http://localhost:3000/api/products_by_scrum_master/${scrum_master_name}`, {mode:"cors"})
-    .then((response) => response.json() )
-    .then((data) => {
-      setProducts(data)
-      console.log(data)
-    })
-    .catch((error) => {
-      console.log(error)
-    });
+    dispatch(fetchProductsByScrumMaster(scrum_master_name))
+    setDeveloperSelected('')
   }
 
   //currently developer name hardcoded below in the button
   function handleDisplayProductsByDeveloper(developer_name){
-
-    console.log("by developer", developer_name)
-
-    fetch(`http://localhost:3000/api/products_by_developer/${developer_name}`, {mode:"cors"})
-    .then((response) => response.json() )
-    .then((data) => {
-      setProducts(data)
-      console.log(data)
-    })
-    .catch((error) => {
-      console.log(error)
-    });
+    dispatch(fetchProductsByDeveloper(developer_name))
+    setScrumMasterSelected('')
   }
 
   return (
     <div>
+
+      <Box >
+        <h1>
+            BC Government Products
+          </h1>        
+          <p>
+            Total number of products : {products.length}
+          </p>
+      </Box>
 
       <Grid
       container
@@ -123,35 +114,29 @@ function ProductsPage() {
       direction="row"
       alignItems="center"
       justifyContent="center"
+      // alignSelf="center"
+      sx = {{height:"300px"}}
       >
-        <Grid item xs={10}>
-          <h1>
-            BC Government Products
-          </h1>        
-          <p>
-            Total number of products : {products.length}
-          </p>
-        </Grid>   
 
-        <Grid item xs={10}>
+        <Grid item xs={2} spacing={0}>
           <AddProductModal/>
         </Grid>   
-
-        <Grid item xs={10}>
-          <Button sx={{color:'black', width:'300px', bgcolor:"lightblue", marginY:"15px"}} onClick={handleDisplayAllProducts}>
+        <Grid item xs={2} spacing={0}>
+          <Button sx={{color:'black', width:"90%", bgcolor:"lightblue"}} onClick={handleDisplayAllProducts}>
             Display All Products <VisibilityIcon fontSize='large'/>
           </Button>
-        </Grid>
+        </Grid>   
 
-        <Grid item xs={10}>
+
+        <Grid item xs={4} spacing={0}>
             { products.length > 0 &&
               <>
-                <InputLabel id="scrum-master-filter-label">Filter by Developer</InputLabel>
+                <InputLabel shrink id="scrum-master-filter-label">By Developer</InputLabel>
                 <Select
-                  labelId="scrum-master-filter-label"
+                  // labelId="scrum-master-filter-label"
                   id="scrum-master-filter"
                   value={developerSelected}
-                  label="Developer Selected"
+                  label="By Developer"
                   onChange={handleDeveloperSelected}
                   sx={{width:'150px'}}
                 >
@@ -172,17 +157,17 @@ function ProductsPage() {
           </Grid>
 
 
-        <Grid item xs={10}>
+        <Grid item xs={3} spacing={0}>
 
 
           { products.length > 0 &&
             <>
-              <InputLabel id="scrum-master-filter-label">Filter by Scrum Master</InputLabel>
+              <InputLabel shrink id="scrum-master-filter-label">By Scrum Master</InputLabel>
               <Select
                 labelId="scrum-master-filter-label"
                 id="scrum-master-filter"
                 value={scrumMasterSelected}
-                label="Scrum Master Selected"
+                label="By Scrum Master"
                 onChange={handleChangeScrumMasterSelected}
                 sx={{width:'150px'}}
               >
@@ -205,7 +190,7 @@ function ProductsPage() {
 
         <Grid item xs={10}>
           <ProductTable products={products}/>
-        </Grid>   
+        </Grid>
         
       </Grid> 
 

@@ -214,6 +214,36 @@
                     }
                 }
             }
+        },
+        "/delete_product/{product_id}" : {
+            "delete" : {
+                "summary" : "Delete the product with this id",
+                "description": "Delete the product with this id",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "product_id",
+                        "in": "path",
+                        "description": "id of product that needs to be deleted",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/dataWrittenToJSONFile"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
         }
     }, 
     "definitions": {

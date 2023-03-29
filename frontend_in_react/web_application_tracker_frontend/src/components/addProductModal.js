@@ -12,6 +12,10 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { DateField } from '@mui/x-date-pickers/DateField';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 
+//state management : 
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts,fetchAddProduct } from '../redux/productReducer';
+
 import{
   FormLabel,
   TextField,
@@ -34,6 +38,7 @@ const style = {
 
 export default function AddProductModal() {
 
+  const dispatch = useDispatch()
   dayjs.extend(customParseFormat)
 
   const [open, setOpen] = React.useState(false);
@@ -68,15 +73,14 @@ export default function AddProductModal() {
     }
   };
 
+  //removes developer from the temporary list of developers that are part of the project
   function handleRemoveDeveloper(developer){
-    console.log("developer to remove : ", developer)
     setDevelopers(Developers.filter( d => d != developer))
-    console.log("remove:",Developers)
   };
 
   function handleAddNewProduct(){
     
-    let data = {
+    let request_body = {
       "productName" : productName,
       "scrumMasterName" : scrumMasterName,
       "productOwnerName" : productOwnerName,
@@ -84,32 +88,16 @@ export default function AddProductModal() {
       "startDate" : startDate.format("YYYY-MM-DD"),
       "methodology" : methodology
     }
-    console.log(" current setup : ", data)
 
-    fetch(`http://localhost:3000/api/add_product`, {
-      mode:"cors", 
-      method:"POST", 
-      body: JSON.stringify(data),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      }    
-    })
-    .then((response) => response.json() )
-    .then((data) => {
-      console.log(data)
-      setOpen(false)
-      document.location.reload()//check syntax
-    })
-    .catch((error) => {
-      console.log(error)
-    });
-
-    
+    dispatch(fetchAddProduct(request_body)) //to write the new product
+      .then(()=>{console.log("dispatching after") 
+      dispatch(fetchProducts())})
+      .then(handleClose())
   }
 
   return (
     <div>
-      <Button sx={{color:'black', width:'300px', bgcolor:"lightblue", marginY:"15px"}} onClick={handleOpen}>
+      <Button fullWidth sx={{color:'black', width:"90%", bgcolor:"lightblue"}} onClick={handleOpen}>
         Add New Product <AddCircleIcon fontSize='large'/>
       </Button>
       <Modal
@@ -178,9 +166,9 @@ export default function AddProductModal() {
             <Grid item xs = {12}>
               { Developers.length > 0 && Developers.map( (developer) => {
                   return(
-                    <Stack key={"stack-"+developer} direction = "row" >
-                      <Typography>{developer}</Typography>
-                      <Button type="button" variant="contained" onClick={()=>handleRemoveDeveloper(developer)}><PersonRemoveIcon fontSize='small'/></Button>
+                    <Stack key={"stack-"+developer} direction = "row" sx={{marginY:"5px"}}>
+                      <Typography sx={{width:"70%"}}>{developer}</Typography>
+                      <Button sx={{width:"30%"}} type="button" variant="contained" onClick={()=>handleRemoveDeveloper(developer)}>Remove<PersonRemoveIcon fontSize='small'/></Button>
                     </Stack>
                   )
                 })

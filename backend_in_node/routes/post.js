@@ -18,20 +18,14 @@ const fs = require('fs')
 postrouter.post("/add_product",
     async(req,res) => {
 
-        console.log("request body : " , req.body)
-
         //read in the data
         let rawdata = fs.readFileSync('products_data.json');
         let products = JSON.parse(rawdata)['all_products'];
-        // console.log(products);
 
         //find highest index, and add 1 to it to create the new product id
         maxIdProductIndex = products.reduce((a,b)=>a.productId>b.productId.y?a:b).productId
 
-        console.log("productIdToUseToStoreWithoutClash: ", maxIdProductIndex+1)
-
-        //add new entry to the products
-        products.push({
+        newProduct = {
             'productId':maxIdProductIndex+1,
             'productName':req.body.productName,
             'productOwnerName':req.body.productOwnerName,
@@ -39,7 +33,12 @@ postrouter.post("/add_product",
             'scrumMasterName':req.body.scrumMasterName,
             'startDate':req.body.startDate,
             'methodology':req.body.methodology
-        })
+        }
+
+        //add new entry to the products
+        products.push(newProduct)
+
+        console.log("POST /add_product - added product: ", newProduct)
 
         adjusted_content = {"all_products":products}
 

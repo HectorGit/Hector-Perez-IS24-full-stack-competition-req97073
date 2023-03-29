@@ -4,7 +4,7 @@
   "description": "BC GOV Products API",
   "main": "bcgov_products.js",
   "scripts": {
-    "start": "nodemon bcgov_products.js"
+    "start": "node bcgov_products.js"
   },
   "repository": {
     "type": "git",
